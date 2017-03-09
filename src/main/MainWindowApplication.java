@@ -47,11 +47,11 @@ public class MainWindowApplication {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel jp_drawing_bg = new JPanel();
-		jp_drawing_bg.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		jp_drawing_bg.setBackground(Color.WHITE);
-		jp_drawing_bg.setBounds(30, 50, 350, 350);
-		frame.getContentPane().add(jp_drawing_bg);
+		final PadDraw jp_drawing = new PadDraw();
+		jp_drawing.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		jp_drawing.setSize(350, 350);
+		jp_drawing.setLocation(30, 50);
+		frame.getContentPane().add(jp_drawing);
 		
 		JPanel jp_output = new JPanel();
 		jp_output.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -60,9 +60,9 @@ public class MainWindowApplication {
 		jp_output.setLayout(null);
 		
 		tf_output = new JTextField();
+		tf_output.setEditable(false);
 		tf_output.setBounds(10, 30, 150, 20);
 		jp_output.add(tf_output);
-		tf_output.setText("TEST");
 		tf_output.setColumns(10);
 		
 		JLabel lbl_output = new JLabel("Output :");

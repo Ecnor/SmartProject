@@ -1,11 +1,16 @@
 package main;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 
-
 public class PadDraw extends JComponent {
+	/**
+	 * Default serial version UID
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	Image image;
 	//this is gonna be your image that you draw on
 	Graphics2D graphics2D;
@@ -47,8 +52,8 @@ public class PadDraw extends JComponent {
 			graphics2D = (Graphics2D)image.getGraphics();
 			graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			clear();
-
 		}
+		
 		g.drawImage(image, 0, 0, null);
 	}
 	//this is the painting bit
@@ -70,30 +75,4 @@ public class PadDraw extends JComponent {
 	//it sets the colors as white
 	//then it fills the window with white
 	//thin it sets the color back to black
-	public void red(){
-		graphics2D.setPaint(Color.red);
-		repaint();
-	}
-	//this is the red paint
-	public void black(){
-		graphics2D.setPaint(Color.black);
-		repaint();
-	}
-	//black paint
-	public void magenta(){
-		graphics2D.setPaint(Color.magenta);
-		repaint();
-	}
-	//magenta paint
-	public void blue(){
-		graphics2D.setPaint(Color.blue);
-		repaint();
-	}
-	//blue paint
-	public void green(){
-		graphics2D.setPaint(Color.green);
-		repaint();
-	}
-	//green paint
-
 }

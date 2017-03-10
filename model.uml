@@ -8,6 +8,10 @@
     </ownedAttribute>
     <ownedAttribute xmi:id="_RcNwYATZEeeBxf9uPSbtcw" name="origin" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite"/>
     <ownedAttribute xmi:id="_FPWDgATcEeeBxf9uPSbtcw" name="end" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite"/>
+    <ownedAttribute xmi:id="_un5rYAVxEeeHFoUy5l9_HA" name="allAngles" visibility="private" type="_eCctkATYEeeBxf9uPSbtcw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zXqmIAVxEeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z8PS0AVxEeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_XmhzAATYEeeBxf9uPSbtcw" name="Point">
     <ownedAttribute xmi:id="_E15wIATZEeeBxf9uPSbtcw" name="x" visibility="private">
@@ -26,6 +30,9 @@
         <body>Direction de la tête de l'angle prise par la bissectrice. 
 Comprise entre 0 et 359. 0 La tête est en haut, 90 à droite, 180 en bas 270 à gauche.</body>
       </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Jrt-YAVvEeeHFoUy5l9_HA" name="way" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
   </packagedElement>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_O3LdQATYEeeBxf9uPSbtcw" name="NewModel">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_O3LdQATYEeeBxf9uPSbtcw" name="NewModel">
   <packagedElement xmi:type="uml:Class" xmi:id="_XSigAATYEeeBxf9uPSbtcw" name="Letter">
     <ownedAttribute xmi:id="_pltVYATYEeeBxf9uPSbtcw" name="character" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
@@ -8,10 +8,19 @@
     </ownedAttribute>
     <ownedAttribute xmi:id="_RcNwYATZEeeBxf9uPSbtcw" name="origin" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite"/>
     <ownedAttribute xmi:id="_FPWDgATcEeeBxf9uPSbtcw" name="end" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite"/>
-    <ownedAttribute xmi:id="_un5rYAVxEeeHFoUy5l9_HA" name="allAngles" visibility="private" type="_eCctkATYEeeBxf9uPSbtcw" aggregation="composite">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zXqmIAVxEeeHFoUy5l9_HA"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z8PS0AVxEeeHFoUy5l9_HA" value="*"/>
+    <ownedAttribute xmi:id="_5-oO4AV4EeeHFoUy5l9_HA" name="allAngles" visibility="private" type="_eCctkATYEeeBxf9uPSbtcw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9aaZQAV4EeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9aaZQQV4EeeHFoUy5l9_HA" value="*"/>
     </ownedAttribute>
+    <ownedOperation xmi:id="_zNIlwAWgEeeDuf3JxrwNkQ" name="Letter">
+      <ownedParameter xmi:id="_2hVhcAWgEeeDuf3JxrwNkQ" name="charchater">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_73wMgAWgEeeDuf3JxrwNkQ" name="origin" type="_XmhzAATYEeeBxf9uPSbtcw"/>
+      <ownedParameter xmi:id="_93vuUAWgEeeDuf3JxrwNkQ" name="end" type="_XmhzAATYEeeBxf9uPSbtcw"/>
+      <ownedParameter xmi:id="_Irj2MAWhEeeDuf3JxrwNkQ" name="allAngles" type="_Dr3CAAWhEeeDuf3JxrwNkQ"/>
+      <ownedParameter xmi:id="_Q3fV0AWhEeeDuf3JxrwNkQ" type="_XSigAATYEeeBxf9uPSbtcw" direction="return"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_XmhzAATYEeeBxf9uPSbtcw" name="Point">
     <ownedAttribute xmi:id="_E15wIATZEeeBxf9uPSbtcw" name="x" visibility="private">
@@ -20,6 +29,17 @@
     <ownedAttribute xmi:id="_J4kYwATZEeeBxf9uPSbtcw" name="y" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
+    <ownedOperation xmi:id="_z3M90AWdEeeDuf3JxrwNkQ" name="Point">
+      <ownedParameter xmi:id="_8rDZEAWdEeeDuf3JxrwNkQ" name="x">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="__0YhgAWdEeeDuf3JxrwNkQ" name="y">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_CNSSkAWeEeeDuf3JxrwNkQ" type="_XmhzAATYEeeBxf9uPSbtcw" direction="return">
+        <name xsi:nil="true"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_eCctkATYEeeBxf9uPSbtcw" name="Angle">
     <ownedAttribute xmi:id="_Er-l0ATeEeeBxf9uPSbtcw" name="type" visibility="private">
@@ -35,5 +55,124 @@ Comprise entre 0 et 359. 0 La tête est en haut, 90 à droite, 180 en bas 270 à
     <ownedAttribute xmi:id="_Jrt-YAVvEeeHFoUy5l9_HA" name="way" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
+    <ownedOperation xmi:id="_YciboAWhEeeDuf3JxrwNkQ" name="Angle">
+      <ownedParameter xmi:id="_bwLWoAWhEeeDuf3JxrwNkQ" name="type">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_imLlIAWhEeeDuf3JxrwNkQ" name="direction">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_n_dW8AWhEeeDuf3JxrwNkQ" name="way">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_tuTJEAWhEeeDuf3JxrwNkQ" type="_eCctkATYEeeBxf9uPSbtcw" direction="return"/>
+    </ownedOperation>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZiYYQAVzEeeHFoUy5l9_HA" name="AngleCountNode">
+    <ownedAttribute xmi:id="_bbgVsAV2EeeHFoUy5l9_HA" name="letters" visibility="private" type="_XSigAATYEeeBxf9uPSbtcw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igFywAV2EeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igGZ0AV2EeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rs2dQAV2EeeHFoUy5l9_HA" name="angleCount" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tl4bcAV2EeeHFoUy5l9_HA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tl4bcQV2EeeHFoUy5l9_HA" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_vw_BEAV2EeeHFoUy5l9_HA" name="insert">
+      <ownedParameter xmi:id="_KX8RkAV3EeeHFoUy5l9_HA" name="letter_to_insert" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_yhzi4AV2EeeHFoUy5l9_HA" name="guess">
+      <ownedParameter xmi:id="_T3acsAV3EeeHFoUy5l9_HA" name="letter_to_guess" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_WcYFQAWiEeeDuf3JxrwNkQ" name="AngleCountNode">
+      <ownedParameter xmi:id="_l_a8YAWiEeeDuf3JxrwNkQ" name="angleCount">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_qssj0AWiEeeDuf3JxrwNkQ" type="_ZiYYQAVzEeeHFoUy5l9_HA" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZyAvsAVzEeeHFoUy5l9_HA" name="LetterTree">
+    <ownedAttribute xmi:id="_e5EW0AV4EeeHFoUy5l9_HA" name="allOENodes" visibility="private" type="_aDux0AVzEeeHFoUy5l9_HA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kOx3QAV4EeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kOyeUAV4EeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_lj-IkAV4EeeHFoUy5l9_HA" name="insert">
+      <ownedParameter xmi:id="_XR-0MAV5EeeHFoUy5l9_HA" name="letter_to_insert" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_lploYAV4EeeHFoUy5l9_HA" name="guess">
+      <ownedParameter xmi:id="_bAxaIAV5EeeHFoUy5l9_HA" name="letter_to_guess" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_m2TTIAV4EeeHFoUy5l9_HA" name="loadFile">
+      <ownedParameter xmi:id="_gXsbgAV5EeeHFoUy5l9_HA" name="file_to_load">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_6GLrwAWhEeeDuf3JxrwNkQ" name="letterTree">
+      <ownedParameter xmi:id="_98WFAAWhEeeDuf3JxrwNkQ" type="_ZyAvsAVzEeeHFoUy5l9_HA" direction="out"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aDux0AVzEeeHFoUy5l9_HA" name="OENode">
+    <ownedAttribute xmi:id="_izL4cAV3EeeHFoUy5l9_HA" name="AllangleCountNode" visibility="private" type="_ZiYYQAVzEeeHFoUy5l9_HA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mYM3UAV3EeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mYM3UQV3EeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_wru8oAV3EeeHFoUy5l9_HA" name="origin" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yQD2IAV3EeeHFoUy5l9_HA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yQEdMAV3EeeHFoUy5l9_HA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_y7zh0AV3EeeHFoUy5l9_HA" name="end" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0j0BcAV3EeeHFoUy5l9_HA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0j0BcQV3EeeHFoUy5l9_HA" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_1TNeEAV3EeeHFoUy5l9_HA" name="insert">
+      <ownedParameter xmi:id="__O65QAV3EeeHFoUy5l9_HA" name="letter_to_insert" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_1rnXAAV3EeeHFoUy5l9_HA" name="guess">
+      <ownedParameter xmi:id="_HvOtcAV4EeeHFoUy5l9_HA" name="letter_to_insert" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ElgKUAWiEeeDuf3JxrwNkQ" name="OENode">
+      <ownedParameter xmi:id="_J1h5gAWiEeeDuf3JxrwNkQ" name="origin" type="_XmhzAATYEeeBxf9uPSbtcw"/>
+      <ownedParameter xmi:id="_NGFrUAWiEeeDuf3JxrwNkQ" name="end" type="_XmhzAATYEeeBxf9uPSbtcw"/>
+      <ownedParameter xmi:id="_PtlSAAWiEeeDuf3JxrwNkQ" type="_aDux0AVzEeeHFoUy5l9_HA" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aTqrQAVzEeeHFoUy5l9_HA" name="UserLetterTrace">
+    <ownedAttribute xmi:id="_xyXxYAVzEeeHFoUy5l9_HA" name="allPoints" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4Kz6IAVzEeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4lGCYAVzEeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_9zey0AVzEeeHFoUy5l9_HA" name="derivedAllPoints" visibility="private" type="_XmhzAATYEeeBxf9uPSbtcw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EIqMMAV0EeeHFoUy5l9_HA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Efgl8AV0EeeHFoUy5l9_HA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_F6evIAV0EeeHFoUy5l9_HA" name="guessedLetter" visibility="private" type="_XSigAATYEeeBxf9uPSbtcw"/>
+    <ownedOperation xmi:id="_esuEQAV1EeeHFoUy5l9_HA" name="derivate" visibility="private"/>
+    <ownedOperation xmi:id="_ifJNAAV1EeeHFoUy5l9_HA" name="guessOriginEnd" visibility="private"/>
+    <ownedOperation xmi:id="_q7nqEAV1EeeHFoUy5l9_HA" name="guessAngles" visibility="private"/>
+    <ownedOperation xmi:id="_u5J2oAV1EeeHFoUy5l9_HA" name="guessLetter"/>
+    <ownedOperation xmi:id="_CpBBwAWdEeeDuf3JxrwNkQ" name="UserLetterTrace">
+      <ownedParameter xmi:id="_GMvnMAWdEeeDuf3JxrwNkQ" type="_aTqrQAVzEeeHFoUy5l9_HA" direction="return">
+        <name xsi:nil="true"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_KV_UgAWdEeeDuf3JxrwNkQ" name="allPoints" type="_d0i-8AWdEeeDuf3JxrwNkQ"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_sJi48AV5EeeHFoUy5l9_HA" name="MainWindowApplication">
+    <ownedAttribute xmi:id="_U1X88AV7EeeHFoUy5l9_HA" name="frame" visibility="private" type="_p_H94AV7EeeHFoUy5l9_HA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_U1YkAAV7EeeHFoUy5l9_HA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_U1ZyIAV7EeeHFoUy5l9_HA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_A5avYAV8EeeHFoUy5l9_HA" name="tf_output" visibility="private" type="_2I398AV7EeeHFoUy5l9_HA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CRNowAV8EeeHFoUy5l9_HA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CROP0AV8EeeHFoUy5l9_HA" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_MytRkAV8EeeHFoUy5l9_HA" name="main" isStatic="true">
+      <ownedParameter xmi:id="_ZLJ08AV8EeeHFoUy5l9_HA" name="args" type="_EBYJYAV9EeeHFoUy5l9_HA"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_p_H94AV7EeeHFoUy5l9_HA" name="JFrame"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_2I398AV7EeeHFoUy5l9_HA" name="JTextField"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EBYJYAV9EeeHFoUy5l9_HA" name="String []"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_d0i-8AWdEeeDuf3JxrwNkQ" name="ArrayList &lt;Point>"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Dr3CAAWhEeeDuf3JxrwNkQ" name="ArrayList &lt;Angle>"/>
 </uml:Model>

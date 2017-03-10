@@ -1,53 +1,51 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
+package main;
 
 import java.util.ArrayList;
-// Start of user code (user defined imports)
 
-// End of user code
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Description of AngleCountNode.
+ * Noeud du compteur d'angle.
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class AngleCountNode {
 	/**
-	 * Description of the property letters.
+	 * Liste des lettres avec le même nombre d'angles
 	 */
 	private ArrayList<Letter> letters = new ArrayList<Letter>();
 
 	/**
-	 * Description of the property angleCount.
+	 * Nombre d'angles
 	 */
 	private int angleCount = 0;
-
-	// Start of user code (user defined attributes for AngleCountNode)
-
-	// End of user code
+	
+	/**
+	 * Contructeur de la classe AngleCountNode
+	 * @param ac Nombre d'angles
+	 */
+	public AngleCountNode(int ac) {
+		this.angleCount = ac;
+	}
 
 	/**
-	 * Description of the method insert.
-	 * @param letter_to_insert 
+	 * Insère une lettre
+	 * @param letter_to_insert Lettre à insèrer
 	 */
 	public void insert(Letter letter_to_insert) {
-		// Start of user code for method insert
-		// End of user code
+		// TODO: insert
+		throw new NotImplementedException();
 	}
 
 	/**
 	 * Description of the method guess.
 	 * @param letter_to_guess 
 	 */
-	public void guess(Letter letter_to_guess) {
-		// Start of user code for method guess
-		// End of user code
+	public Letter guess(Letter letter_to_guess) {
+		// TODO: guess
+		throw new NotImplementedException();
 	}
-
-	// Start of user code (user defined methods for AngleCountNode)
-
-	// End of user code
+	
 	/**
 	 * Returns letters.
 	 * @return letters 
@@ -63,13 +61,4 @@ public class AngleCountNode {
 	public int getAngleCount() {
 		return this.angleCount;
 	}
-
-	/**
-	 * Sets a value to attribute angleCount. 
-	 * @param newAngleCount 
-	 */
-	public void setAngleCount(int newAngleCount) {
-		this.angleCount = newAngleCount;
-	}
-
 }

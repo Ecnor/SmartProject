@@ -1,61 +1,53 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
+package main;
 
 import java.util.ArrayList;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
- * Description of Letter.
+ * Classe décrivant une lettre.
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Letter {
 	/**
-	 * Description of the property character.
+	 * Lettre
 	 */
-	private char character = 0;
+	private char character;
 	
 	/**
-	 * Description of the property origin.
+	 * Origine de la lettre
 	 */
 	private Point origin = null;
 	
 	/**
-	 * Description of the property end.
+	 * Fin de la lettre
 	 */
 	private Point end = null;
 	
 	/**
-	 * Description of the property allAngles.
+	 * Angles de la lettre
 	 */
 	private ArrayList<Angle> allAngles = new ArrayList<Angle>();
 	
-	// Start of user code (user defined attributes for Letter)
-
-	// End of user code
+	/**
+	 * Constructeur de la classe Lettre
+	 * @param c Caractère
+	 * @param o Origine
+	 * @param e Fin
+	 * @param a Angles
+	 */
+	public Letter(char c, Point o, Point e, ArrayList<Angle> a) {
+		this.character = c;
+		this.origin = o;
+		this.end = e;		
+		this.allAngles = a;
+	}
 	
-	
-	// Start of user code (user defined methods for Letter)
-
-	// End of user code
 	/**
 	 * Returns character.
 	 * @return character 
 	 */
 	public char getCharacter() {
 		return this.character;
-	}
-	
-	/**
-	 * Sets a value to attribute character. 
-	 * @param newCharacter 
-	 */
-	public void setCharacter(char newCharacter) {
-	    this.character = newCharacter;
 	}
 
 	/**
@@ -65,14 +57,6 @@ public class Letter {
 	public Point getOrigin() {
 		return this.origin;
 	}
-	
-	/**
-	 * Sets a value to attribute origin. 
-	 * @param newOrigin 
-	 */
-	public void setOrigin(Point newOrigin) {
-	    this.origin = newOrigin;
-	}
 
 	/**
 	 * Returns end.
@@ -80,14 +64,6 @@ public class Letter {
 	 */
 	public Point getEnd() {
 		return this.end;
-	}
-	
-	/**
-	 * Sets a value to attribute end. 
-	 * @param newEnd 
-	 */
-	public void setEnd(Point newEnd) {
-	    this.end = newEnd;
 	}
 
 	/**
@@ -97,7 +73,4 @@ public class Letter {
 	public ArrayList<Angle> getAllAngles() {
 		return this.allAngles;
 	}
-
-
-
 }

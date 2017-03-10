@@ -30,7 +30,16 @@ public class Angle {
 	 
 	private int way = 0;
 	*/
-
+	
+	/**
+	 * Constructeur de la classe Angle
+	 * @param t type de l'angle
+	 * @param d direction de l'angle
+	 */
+	public Angle(TYPES t, int d) {
+		this.type = t;
+		this.direction = d;
+	}
 	
 	/**
 	 * Returns type.
@@ -40,7 +49,6 @@ public class Angle {
 		return this.type;
 	}
 
-
 	/**
 	 * Returns direction.
 	 * @return direction Direction de la tête de l'angle prise par la bissectrice. 
@@ -49,5 +57,4 @@ public class Angle {
 	public int getDirection() {
 		return this.direction;
 	}
-
 }

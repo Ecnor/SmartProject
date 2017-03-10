@@ -1,67 +1,57 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
+package main;
 
 import java.util.ArrayList;
-// Start of user code (user defined imports)
 
-// End of user code
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Description of LetterTree.
+ * Arbre de lettres
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class LetterTree {
 	/**
-	 * Description of the property allOENodes.
+	 * Noeuds origine/fin
 	 */
 	private ArrayList<OENode> allOENodes = new ArrayList<OENode>();
 	
-	// Start of user code (user defined attributes for LetterTree)
-
-	// End of user code
-	
+	/**
+	 * Fichier description lettres
+	 */
+	private String file_letters_description_path;
 	
 	/**
-	 * Description of the method insert.
+	 * Constructeur de la classe LetterTree
+	 * @param f Chemin du fichier de description des lettres
+	 */
+	public LetterTree(String f) {
+		this.file_letters_description_path = f;
+	}
+	
+	/**
+	 * Insert
 	 * @param letter_to_insert 
 	 */
 	public void insert(Letter letter_to_insert) {
-		// Start of user code for method insert
-		// End of user code
+		// TODO: insert
+		throw new NotImplementedException();
 	}
 	 
 	/**
 	 * Description of the method guess.
 	 * @param letter_to_guess 
 	 */
-	public void guess(Letter letter_to_guess) {
-		// Start of user code for method guess
-		// End of user code
+	public Letter guess(Letter letter_to_guess) {
+		// TODO: guess
+		throw new NotImplementedException();
 	}
 	 
 	/**
 	 * Description of the method loadFile.
 	 * @param file_to_load 
 	 */
-	public void loadFile(String file_to_load) {
-		// Start of user code for method loadFile
-		// End of user code
+	public void loadFile() {
+		// TODO: loadFile
+		throw new NotImplementedException();
 	}
-	 
-	// Start of user code (user defined methods for LetterTree)
-
-	// End of user code
-	/**
-	 * Returns allOENodes.
-	 * @return allOENodes 
-	 */
-	public ArrayList<OENode> getAllOENodes() {
-		return this.allOENodes;
-	}
-
-
-
 }

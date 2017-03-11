@@ -2,6 +2,8 @@ package main;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 
@@ -12,11 +14,10 @@ public class PadDraw extends JComponent {
 	private static final long serialVersionUID = 1L;
 	
 	Image image;
-	//this is gonna be your image that you draw on
 	Graphics2D graphics2D;
-	//this is what we'll be using to draw on
 	int currentX, currentY, oldX, oldY;
-	//these are gonna hold our mouse coordinates
+	
+	private ArrayList<Point> allPoints = new ArrayList<Point>();
 
 	//Now for the constructors
 	public PadDraw(){
@@ -33,8 +34,12 @@ public class PadDraw extends JComponent {
 			public void mouseDragged(MouseEvent e){
 				currentX = e.getX();
 				currentY = e.getY();
+				
+				allPoints.add(new Point(currentX, currentY));
+				
 				if(graphics2D != null)
-				graphics2D.drawLine(oldX, oldY, currentX, currentY);
+					graphics2D.drawLine(oldX, oldY, currentX, currentY);
+				
 				repaint();
 				oldX = currentX;
 				oldY = currentY;
@@ -44,6 +49,20 @@ public class PadDraw extends JComponent {
 		//while the mouse is dragged it sets currentX & currentY as the mouses x and y
 		//then it draws a line at the coordinates
 		//it repaints it and sets oldX and oldY as currentX and currentY
+		
+		addMouseListener(new MouseAdapter(){
+			public void mouseReleased(MouseEvent e){
+				System.out.println(allPoints.toString());
+				System.out.println(allPoints.size());
+				
+				UserLetterTrace ult = new UserLetterTrace(allPoints);
+				//ult.guessLetter();
+				
+				MainWindowApplication.addLetterOutput('A');
+				
+				clear();
+			}
+		});
 	}
 
 	public void paintComponent(Graphics g){
@@ -70,6 +89,8 @@ public class PadDraw extends JComponent {
 		graphics2D.fillRect(0, 0, getSize().width, getSize().height);
 		graphics2D.setPaint(Color.black);
 		repaint();
+		
+		allPoints.clear();
 	}
 	//this is the clear
 	//it sets the colors as white

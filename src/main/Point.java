@@ -26,6 +26,10 @@ public class Point {
 		this.y = cy;
 	}
 	
+	public String toString() {
+		return "(x: " + this.x + " ; y: " + this.y + ")\n";
+	}
+	
 	/**
 	 * Returns x.
 	 * @return x 

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 public class MainWindowApplication {
 
 	private JFrame frame;
-	private JTextField tf_output;
+	private static JTextField tf_output;
 
 	/**
 	 * Launch the application.
@@ -68,5 +68,9 @@ public class MainWindowApplication {
 		JLabel lbl_output = new JLabel("Output :");
 		lbl_output.setBounds(10, 10, 50, 15);
 		jp_output.add(lbl_output);
+	}
+	
+	public static void addLetterOutput(char c) {
+		tf_output.setText(tf_output.getText() + c);
 	}
 }

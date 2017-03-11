@@ -1,60 +1,58 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-
+package main;
+	
 import java.util.ArrayList;
-// Start of user code (user defined imports)
 
-// End of user code
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Description of OENode.
+ * Noeud orignie/fin
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class OENode {
 	/**
-	 * Description of the property AllangleCountNode.
+	 * Noeuds AngleCountNode
 	 */
 	private ArrayList<AngleCountNode> AllangleCountNode = new ArrayList<AngleCountNode>();
 	
 	/**
-	 * Description of the property origin.
+	 * Origine lettre
 	 */
 	private Point origin = null;
 	
 	/**
-	 * Description of the property end.
+	 * Fin lettre
 	 */
 	private Point end = null;
 	
-	// Start of user code (user defined attributes for OENode)
-
-	// End of user code
-	
+	/**
+	 * Constructeur de la classe OENode
+	 * @param o Origine
+	 * @param e Fin
+	 */
+	public OENode(Point o, Point e) {
+		this.origin = o;
+		this.end = e;
+	}
 	
 	/**
-	 * Description of the method insert.
+	 * Insert
 	 * @param letter_to_insert 
 	 */
 	public void insert(Letter letter_to_insert) {
-		// Start of user code for method insert
-		// End of user code
+		// TODO: insert
+		throw new NotImplementedException();
 	}
 	 
 	/**
-	 * Description of the method guess.
+	 * Guess
 	 * @param letter_to_insert 
 	 */
 	public void guess(Letter letter_to_insert) {
-		// Start of user code for method guess
-		// End of user code
+		// TODO: guess
+		throw new NotImplementedException();
 	}
 	 
-	// Start of user code (user defined methods for OENode)
-
-	// End of user code
 	/**
 	 * Returns AllangleCountNode.
 	 * @return AllangleCountNode 
@@ -70,14 +68,6 @@ public class OENode {
 	public Point getOrigin() {
 		return this.origin;
 	}
-	
-	/**
-	 * Sets a value to attribute origin. 
-	 * @param newOrigin 
-	 */
-	public void setOrigin(Point newOrigin) {
-	    this.origin = newOrigin;
-	}
 
 	/**
 	 * Returns end.
@@ -86,15 +76,4 @@ public class OENode {
 	public Point getEnd() {
 		return this.end;
 	}
-	
-	/**
-	 * Sets a value to attribute end. 
-	 * @param newEnd 
-	 */
-	public void setEnd(Point newEnd) {
-	    this.end = newEnd;
-	}
-
-
-
 }

@@ -1,74 +1,70 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
+package main;
 
 import java.util.ArrayList;
-// Start of user code (user defined imports)
 
-// End of user code
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Description of UserLetterTrace.
+ * Classe décrivant la trace de l'utilisateur
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class UserLetterTrace {
 	/**
-	 * Description of the property allPoints.
+	 * Liste des points tracés
 	 */
 	private ArrayList<Point> allPoints = new ArrayList<Point>();
 	
 	/**
-	 * Description of the property derivedAllPoints.
+	 * Liste des points dérivés
 	 */
 	private ArrayList<Point> derivedAllPoints = new ArrayList<Point>();
 	
 	/**
-	 * Description of the property guessedLetter.
+	 * Lettre a reconnaitre
 	 */
 	private Letter guessedLetter = null;
 	
-	// Start of user code (user defined attributes for UserLetterTrace)
-
-	// End of user code
-	
+	/**
+	 * Constructeur de la classe UserLetterTrace
+	 * @param pts Points
+	 */
+	public UserLetterTrace(ArrayList<Point> pts) {
+		this.allPoints = pts;
+	}
 	
 	/**
-	 * Description of the method derivate.
+	 * Dérive
 	 */
 	private void derivate() {
-		// Start of user code for method derivate
-		// End of user code
+		// TODO: derivate
+		throw new NotImplementedException();
 	}
 	 
 	/**
-	 * Description of the method guessOriginEnd.
+	 * Récupère l'origine et la fin de la lettre
 	 */
 	private void guessOriginEnd() {
-		// Start of user code for method guessOriginEnd
-		// End of user code
+		// TODO: guessOriginEnd
+		throw new NotImplementedException();
 	}
 	 
 	/**
-	 * Description of the method guessAngles.
+	 * Récupère les angles de la lettre
 	 */
 	private void guessAngles() {
-		// Start of user code for method guessAngles
-		// End of user code
+		// TODO: guessAngles
+		throw new NotImplementedException();
 	}
 	 
 	/**
-	 * Description of the method guessLetter.
+	 * guessLetter
 	 */
 	public void guessLetter() {
-		// Start of user code for method guessLetter
-		// End of user code
+		// TODO: guessLetter
+		throw new NotImplementedException();
 	}
-	 
-	// Start of user code (user defined methods for UserLetterTrace)
 
-	// End of user code
 	/**
 	 * Returns allPoints.
 	 * @return allPoints 
@@ -92,15 +88,4 @@ public class UserLetterTrace {
 	public Letter getGuessedLetter() {
 		return this.guessedLetter;
 	}
-	
-	/**
-	 * Sets a value to attribute guessedLetter. 
-	 * @param newGuessedLetter 
-	 */
-	public void setGuessedLetter(Letter newGuessedLetter) {
-	    this.guessedLetter = newGuessedLetter;
-	}
-
-
-
 }

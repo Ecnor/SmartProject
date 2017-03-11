@@ -1,50 +1,37 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-
-// Start of user code (user defined imports)
-
-// End of user code
+package main;
 
 /**
- * Description of Point.
+ * Classe décrivant un point 2D
  * 
- * @author alain
+ * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Point {
 	/**
-	 * Description of the property x.
+	 * Coordonnée en x
 	 */
 	private int x = 0;
 	
 	/**
-	 * Description of the property y.
+	 * Coordonnée en y
 	 */
-	private int y = 0;
+	private int y = 0;	
 	
-	// Start of user code (user defined attributes for Point)
-
-	// End of user code
+	/**
+	 * Contructeur de la classe Point
+	 * @param cx Coordonnée en x
+	 * @param cy Coordonnée en y
+	 */
+	public Point(int cx, int cy) {
+		this.x = cx;
+		this.y = cy;
+	}
 	
-	
-	// Start of user code (user defined methods for Point)
-
-	// End of user code
 	/**
 	 * Returns x.
 	 * @return x 
 	 */
 	public int getX() {
 		return this.x;
-	}
-	
-	/**
-	 * Sets a value to attribute x. 
-	 * @param newX 
-	 */
-	public void setX(int newX) {
-	    this.x = newX;
 	}
 
 	/**
@@ -54,15 +41,4 @@ public class Point {
 	public int getY() {
 		return this.y;
 	}
-	
-	/**
-	 * Sets a value to attribute y. 
-	 * @param newY 
-	 */
-	public void setY(int newY) {
-	    this.y = newY;
-	}
-
-
-
 }

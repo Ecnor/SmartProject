@@ -11,19 +11,19 @@ public class Point {
 	/**
 	 * Coordonn�e en x
 	 */
-	private float x = 0;
+	private int x = 0;
 	
 	/**
 	 * Coordonn�e en y
 	 */
-	private float y = 0;	
+	private int y = 0;	
 	
 	/**
 	 * Contructeur de la classe Point
 	 * @param cx Coordonn�e en x
 	 * @param cy Coordonn�e en y
 	 */
-	public Point(float cx,float cy) {
+	public Point(int cx,int cy) {
 		this.x = cx;
 		this.y = cy;
 	}
@@ -42,7 +42,7 @@ public class Point {
 	 * Returns x.
 	 * @return x 
 	 */
-	public float getX() {
+	public int getX() {
 		return this.x;
 	}
 
@@ -50,7 +50,7 @@ public class Point {
 	 * Returns y.
 	 * @return y 
 	 */
-	public float getY() {
+	public int getY() {
 		return this.y;
 	}
 }

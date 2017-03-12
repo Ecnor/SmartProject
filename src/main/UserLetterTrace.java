@@ -33,44 +33,76 @@ public class UserLetterTrace {
 		this.allPoints = pts;
 	}
 	
+	/**
+	 * Taille de la fen�tre de d�rivation
+	 */
+	public static final int DERIVATE_WIDTH = 5;
+	
+	/**
+	 * Seuil de d�tection de plateau
+	 */
+	public static final int ANGLE_THRESHOLD = 5;
+	
+	/**
+	 * Seuil de d�tection d'un nouvel angle
+	 */
+	public static final int ANGLE_GAP = 3;
+	
 	/**  TODO Mettre en privée une fois que ça fonctionne, perfectionnable mais permet déjà de voir la suite
 	 * D�rive
 	 */
 	public void derivate() 
 	{
-		int width=5;
-		float aheadX,aheadY;
-		float behindX,behindY;
+		int aheadX, aheadY;
+		int behindX, behindY;
 		
-			for(int i=1;i<allPoints.size()-1;i++)
+			for(int i = DERIVATE_WIDTH; i < allPoints.size() - DERIVATE_WIDTH; i++)
 			{
-				aheadX=0; aheadY=0; behindX=0; behindY=0;
-				for(int j=1;j<Math.min(Math.min(width, i),allPoints.size()-i);j++)
+				aheadX = 0; aheadY = 0; behindX = 0; behindY = 0;
+				for(int j = 1; j <= DERIVATE_WIDTH; j++)
 				{				
-					aheadX+=allPoints.get(i+j).getX();
-					aheadY+=allPoints.get(i+j).getY();
-					behindX+=allPoints.get(i-j).getX();
-					behindY+=allPoints.get(i-j).getY();			
+					aheadX += allPoints.get(i + j).getX();
+					aheadY += allPoints.get(i + j).getY();
+					behindX += allPoints.get(i - j).getX();
+					behindY += allPoints.get(i - j).getY();			
 				}
-				derivedAllPoints.add(new Point(aheadX-behindX,aheadY-behindY));
+				derivedAllPoints.add(new Point(aheadX - behindX, aheadY - behindY));
 			}
-			System.out.println("Tableau  de point dérivé : \n"+derivedAllPoints.toString()+"\n");
-	}
-	 
-	/**
-	 * R�cup�re l'origine et la fin de la lettre
-	 */
-	private void guessOriginEnd() {
-		// TODO: guessOriginEnd
-		throw new NotImplementedException();
+			System.out.println("Tableau  de point dérivé : \n" + derivedAllPoints.toString() + "\n");
 	}
 	 
 	/**
 	 * R�cup�re les angles de la lettre
 	 */
-	private void guessAngles() {
-		// TODO: guessAngles
-		throw new NotImplementedException();
+	public void guessAngles() {
+		ArrayList<Integer> indexList = new ArrayList<Integer>();
+		for(int i = 0; i < derivedAllPoints.size(); i++) {
+			if((derivedAllPoints.get(i).getX() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getX() > -ANGLE_THRESHOLD) 
+					|| (derivedAllPoints.get(i).getY() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getY() > -ANGLE_THRESHOLD)) {
+				indexList.add(i);
+			}
+		}
+		
+		System.out.println(indexList.toString());
+		
+		int min = indexList.get(0);
+		int max;
+		for(int j = 0; j < indexList.size() - 1; j++) {
+			if((indexList.get(j + 1) - indexList.get(j)) > ANGLE_GAP) {
+				max = indexList.get(j);				
+				System.out.println("min max: " + ((max + min) / 2) + "\n");
+				min = indexList.get(j + 1);
+			}
+		}
+		
+		max = indexList.get(indexList.size() - 1);
+		
+		if(min != 0) {
+			System.out.println("min max: " + ((max + min) / 2) + "\n");
+		}
+		else {			
+			System.out.println("min max: " + (max / 2) + "\n");
+		}
 	}
 	 
 	/**

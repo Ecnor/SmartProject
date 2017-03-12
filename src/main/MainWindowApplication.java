@@ -8,6 +8,9 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindowApplication {
 
@@ -68,6 +71,15 @@ public class MainWindowApplication {
 		JLabel lbl_output = new JLabel("Output :");
 		lbl_output.setBounds(10, 10, 50, 15);
 		jp_output.add(lbl_output);
+		
+		JButton btnClearLol = new JButton("Clear LOL");
+		btnClearLol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				jp_drawing.clear();
+			}
+		});
+		btnClearLol.setBounds(450, 119, 142, 23);
+		frame.getContentPane().add(btnClearLol);
 	}
 	
 	public static void addLetterOutput(char c) {

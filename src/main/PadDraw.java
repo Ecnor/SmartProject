@@ -57,10 +57,9 @@ public class PadDraw extends JComponent {
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
 				ult.derivate();
+				ult.guessAngles();
 				
 				MainWindowApplication.addLetterOutput('A');
-				
-				//clear();
 			}
 		});
 	}

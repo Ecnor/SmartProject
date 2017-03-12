@@ -52,15 +52,15 @@ public class PadDraw extends JComponent {
 		
 		addMouseListener(new MouseAdapter(){
 			public void mouseReleased(MouseEvent e){
-				System.out.println(allPoints.toString());
+				System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
 				System.out.println(allPoints.size());
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
-				//ult.guessLetter();
+				ult.derivate();
 				
 				MainWindowApplication.addLetterOutput('A');
 				
-				clear();
+				//clear();
 			}
 		});
 	}

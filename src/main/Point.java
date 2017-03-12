@@ -1,25 +1,27 @@
 package main;
 
 /**
- * Classe décrivant un point 2D
+ * Classe dï¿½crivant un point 2D
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Point {
+	
+	static int printCount=0;
 	/**
-	 * Coordonnée en x
+	 * Coordonnï¿½e en x
 	 */
 	private int x = 0;
 	
 	/**
-	 * Coordonnée en y
+	 * Coordonnï¿½e en y
 	 */
 	private int y = 0;	
 	
 	/**
 	 * Contructeur de la classe Point
-	 * @param cx Coordonnée en x
-	 * @param cy Coordonnée en y
+	 * @param cx Coordonnï¿½e en x
+	 * @param cy Coordonnï¿½e en y
 	 */
 	public Point(int cx, int cy) {
 		this.x = cx;
@@ -27,7 +29,13 @@ public class Point {
 	}
 	
 	public String toString() {
-		return "(x: " + this.x + " ; y: " + this.y + ")\n";
+		String retourne="(x: " + this.x + " ; y: " + this.y + ")";
+		if(printCount==10){
+			retourne+="\n";
+			printCount=0;
+		}
+		printCount++;
+		return retourne;
 	}
 	
 	/**

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Classe décrivant la trace de l'utilisateur
+ * Classe dï¿½crivant la trace de l'utilisateur
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class UserLetterTrace {
 	/**
-	 * Liste des points tracés
+	 * Liste des points tracï¿½s
 	 */
 	private ArrayList<Point> allPoints = new ArrayList<Point>();
 	
 	/**
-	 * Liste des points dérivés
+	 * Liste des points dï¿½rivï¿½s
 	 */
 	private ArrayList<Point> derivedAllPoints = new ArrayList<Point>();
 	
@@ -33,16 +33,21 @@ public class UserLetterTrace {
 		this.allPoints = pts;
 	}
 	
-	/**
-	 * Dérive
+	/**  TODO Mettre en privÃ©e une fois que Ã§a fonctionne
+	 * Dï¿½rive
 	 */
-	private void derivate() {
-		// TODO: derivate
-		throw new NotImplementedException();
+	public void derivate() {
+	int width=5;	
+	
+		for(int i=0;i<allPoints.size()-1;i++){
+			derivedAllPoints.add(new Point(allPoints.get(i+1).getX()-allPoints.get(i).getX(),
+					allPoints.get(i+1).getY()-allPoints.get(i).getY()));
+		}
+		System.out.println("Tableau  de point dÃ©rivÃ© : \n"+derivedAllPoints.toString()+"\n");
 	}
 	 
 	/**
-	 * Récupère l'origine et la fin de la lettre
+	 * Rï¿½cupï¿½re l'origine et la fin de la lettre
 	 */
 	private void guessOriginEnd() {
 		// TODO: guessOriginEnd
@@ -50,7 +55,7 @@ public class UserLetterTrace {
 	}
 	 
 	/**
-	 * Récupère les angles de la lettre
+	 * Rï¿½cupï¿½re les angles de la lettre
 	 */
 	private void guessAngles() {
 		// TODO: guessAngles

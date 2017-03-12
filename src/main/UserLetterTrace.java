@@ -33,17 +33,28 @@ public class UserLetterTrace {
 		this.allPoints = pts;
 	}
 	
-	/**  TODO Mettre en privée une fois que ça fonctionne
+	/**  TODO Mettre en privée une fois que ça fonctionne, perfectionnable mais permet déjà de voir la suite
 	 * D�rive
 	 */
-	public void derivate() {
-	int width=5;	
-	
-		for(int i=0;i<allPoints.size()-1;i++){
-			derivedAllPoints.add(new Point(allPoints.get(i+1).getX()-allPoints.get(i).getX(),
-					allPoints.get(i+1).getY()-allPoints.get(i).getY()));
-		}
-		System.out.println("Tableau  de point dérivé : \n"+derivedAllPoints.toString()+"\n");
+	public void derivate() 
+	{
+		int width=5;
+		float aheadX,aheadY;
+		float behindX,behindY;
+		
+			for(int i=1;i<allPoints.size()-1;i++)
+			{
+				aheadX=0; aheadY=0; behindX=0; behindY=0;
+				for(int j=1;j<Math.min(Math.min(width, i),allPoints.size()-i);j++)
+				{				
+					aheadX+=allPoints.get(i+j).getX();
+					aheadY+=allPoints.get(i+j).getY();
+					behindX+=allPoints.get(i-j).getX();
+					behindY+=allPoints.get(i-j).getY();			
+				}
+				derivedAllPoints.add(new Point(aheadX-behindX,aheadY-behindY));
+			}
+			System.out.println("Tableau  de point dérivé : \n"+derivedAllPoints.toString()+"\n");
 	}
 	 
 	/**

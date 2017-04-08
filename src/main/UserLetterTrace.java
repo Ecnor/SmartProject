@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Classe d�crivant la trace de l'utilisateur
+ * Classe enregistre le dessin de l'utilisateur dans l'attribut allPoints.
+ * En extrait les caractéristiques d'une lettre et les range dans une lettre fictive guessedLetter qui sert à interoger la base. 
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
@@ -34,17 +35,17 @@ public class UserLetterTrace {
 	}
 	
 	/**
-	 * Taille de la fen�tre de d�rivation
+	 * Taille de la fen�tre de d�rivation
 	 */
 	public static final int DERIVATE_WIDTH = 5;
 	
 	/**
-	 * Seuil de d�tection de plateau
+	 * Seuil de d�tection de plateau
 	 */
-	public static final int ANGLE_THRESHOLD = 5;
+	public static final int ANGLE_THRESHOLD = 50;
 	
 	/**
-	 * Seuil de d�tection d'un nouvel angle
+	 * Seuil de d�tection d'un nouvel angle
 	 */
 	public static final int ANGLE_GAP = 3;
 	
@@ -68,41 +69,146 @@ public class UserLetterTrace {
 				}
 				derivedAllPoints.add(new Point(aheadX - behindX, aheadY - behindY));
 			}
-			System.out.println("Tableau  de point dérivé : \n" + derivedAllPoints.toString() + "\n");
+			System.out.println("Tableau  de point dérivé : \n");
+			for(int i=0;i<derivedAllPoints.size();i++)
+			{
+				System.out.print(""+derivedAllPoints.get(i)+"i : "+i+" ;");
+				if(i!=0&&i%5==0)
+					System.out.println();
+			}
 	}
 	 
 	/**
 	 * R�cup�re les angles de la lettre
+	 * 
+	 * ça serait bien de commenter le fonctionnement de ce bouzin, la reprise est compliquée...
 	 */
 	public void guessAngles() {
-		ArrayList<Integer> indexList = new ArrayList<Integer>();
+		ArrayList<Integer> indexListX = new ArrayList<Integer>();//liste des indices du tableau dérivée où les x s'annulent
+		ArrayList<Integer> indexListY = new ArrayList<Integer>();//idem avec les y
 		for(int i = 0; i < derivedAllPoints.size(); i++) {
-			if((derivedAllPoints.get(i).getX() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getX() > -ANGLE_THRESHOLD) 
-					|| (derivedAllPoints.get(i).getY() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getY() > -ANGLE_THRESHOLD)) {
-				indexList.add(i);
+			if(derivedAllPoints.get(i).getX() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getX() > -ANGLE_THRESHOLD)
+				indexListX.add(i);
+			if(derivedAllPoints.get(i).getY() < ANGLE_THRESHOLD && derivedAllPoints.get(i).getY() > -ANGLE_THRESHOLD) 
+				indexListY.add(i);
+			
+		}
+		
+		System.out.println("Annulations de la dérivée en X :"+indexListX.toString());
+		System.out.println("Annulations de la dérivée en Y :"+indexListY.toString());
+		
+		parseIndexList(indexListX,'x');
+		parseIndexList(indexListY,'y');
+		
+				
+		
+	}
+	
+	private void parseIndexList(ArrayList<Integer> indexList,char composante)
+	{
+		if(!indexList.isEmpty())
+		{	
+			int min = indexList.get(0);
+			int max;
+			boolean sign_changed=false;
+			for(int j = 0; j < indexList.size() - 1; j++) {
+				//Ici detection chgt signe de l'autre composante.
+				if(composante=='x')
+				{
+					if(derivedAllPoints.get(indexList.get(j)).getY() * derivedAllPoints.get(indexList.get(j+1)).getY()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V1 : Y sign changed!min :"+min+" j :"+j);
+					}
+				}
+				else
+				{
+					if(derivedAllPoints.get(indexList.get(j)).getX() * derivedAllPoints.get(indexList.get(j+1)).getX()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V1 : X sign changed!min :"+min+" j :"+j);
+					}
+				}
+				if((indexList.get(j + 1) - indexList.get(j)) > ANGLE_GAP) {//Nouvel angle, ici construire angle
+					max = indexList.get(j);				
+					System.out.println("moyenne min max: " + ((max + min) / 2) + "\n");
+					min = indexList.get(j + 1);
+					
+					
+					
+					//Autre possibilité de detection de signe
+					if(composante=='x')
+					{
+						if(derivedAllPoints.get(min).getY() * derivedAllPoints.get(max).getY()<0)
+						{
+							sign_changed=true;
+							System.out.println("Detection V2 : Y sign changed!min :"+min+" j :"+j);
+						}
+					}
+					else
+					{
+						if(derivedAllPoints.get(min).getX() * derivedAllPoints.get(max).getX()<0)
+						{
+							sign_changed=true;
+							System.out.println("Detection V2 : X sign changed!min :"+min+" j :"+j);
+						}
+					}
+					
+					
+					
+					
+					sign_changed=false;
+				}
+			}
+			
+			max = indexList.get(indexList.size() - 1);
+			
+			if(min != 0) {
+				System.out.println("min : " +min+" max : " + max + "min max2 " + ((max + min) / 2) + "\n");
+				//Autre possibilité de detection de signe
+				if(composante=='x')
+				{
+					if(derivedAllPoints.get(min).getY() * derivedAllPoints.get(max).getY()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V2 : Y sign changed!min :"+min+" j :"+((max + min) / 2));
+					}
+				}
+				else
+				{
+					if(derivedAllPoints.get(min).getX() * derivedAllPoints.get(max).getX()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V2 : X sign changed!min :"+min+" j :"+((max + min) / 2));
+					}
+				}
+				
+				
+				
+			}
+			else {			
+				System.out.println("min max 2: " + (max / 2) + "\n");
+				//Autre possibilité de detection de signe
+				if(composante=='x')
+				{
+					if(derivedAllPoints.get(min).getY() * derivedAllPoints.get(max).getY()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V2 : Y sign changed!min :"+min+" j :"+(max / 2));
+					}
+				}
+				else
+				{
+					if(derivedAllPoints.get(min).getX() * derivedAllPoints.get(max).getX()<0)
+					{
+						sign_changed=true;
+						System.out.println("Detection V2 : X sign changed!min :"+min+" j :"+(max / 2));
+					}
+				}
 			}
 		}
-		
-		System.out.println(indexList.toString());
-		
-		int min = indexList.get(0);
-		int max;
-		for(int j = 0; j < indexList.size() - 1; j++) {
-			if((indexList.get(j + 1) - indexList.get(j)) > ANGLE_GAP) {
-				max = indexList.get(j);				
-				System.out.println("min max: " + ((max + min) / 2) + "\n");
-				min = indexList.get(j + 1);
-			}
-		}
-		
-		max = indexList.get(indexList.size() - 1);
-		
-		if(min != 0) {
-			System.out.println("min max: " + ((max + min) / 2) + "\n");
-		}
-		else {			
-			System.out.println("min max: " + (max / 2) + "\n");
-		}
+		else
+			System.out.println("bah ya pas d'angles");
 	}
 	 
 	/**

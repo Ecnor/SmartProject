@@ -1,15 +1,15 @@
 package main;
 
 /**
- * Chaque instance de la classe Angle modélise un Angle d'une lettre.  
+ * Chaque instance de la classe Angle modï¿½lise un Angle d'une lettre.  
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Angle {
 	/**
-	 * Valeurs acceptées du champs type. 
-	 *     -sec : changement brutal de dérivée
-	 *     -arrondi : changement de dérivée gentil.
+	 * Valeurs acceptï¿½es du champs type. 
+	 *     -sec : changement brutal de dï¿½rivï¿½e
+	 *     -arrondi : changement de dï¿½rivï¿½e gentil.
 	 */
 	public static enum TYPES{aigu,arrondi};
 	
@@ -20,8 +20,8 @@ public class Angle {
 	private TYPES type;
 
 	/**
-	 * Direction de la tête de l'angle prise par la bissectrice. 
-	Comprise entre 0 et 359. 0 La tête est en haut, 90 à droite, 180 en bas 270 à gauche.
+	 * Direction de la tï¿½te de l'angle prise par la bissectrice. 
+	Comprise entre 0 et 359. 0 La tï¿½te est en haut, 90 ï¿½droite, 180 en bas 270ï¿½ï¿½ gauche.
 	 */
 	private int direction = 0;
 	
@@ -30,9 +30,8 @@ public class Angle {
 	 * @param t type de l'angle
 	 * @param d direction de l'angle
 	 */
-	public Angle(TYPES t, int d) {
+	public Angle(TYPES t) {
 		this.type = t;
-		this.direction = d;
 	}
 	
 	/**
@@ -45,10 +44,14 @@ public class Angle {
 
 	/**
 	 * Returns direction.
-	 * @return direction Direction de la tête de l'angle prise par la bissectrice. 
-	 Comprise entre 0 et 359. 0 La tÃªte est en haut, 90 à droite, 180 en bas 270 à gauche.
+	 * @return direction Direction de la tï¿½te de l'angle prise par la bissectrice. 
+	 Comprise entre 0 et 359. 0 La tÃªte est en haut, 90 ï¿½droite, 180 en bas 270 ï¿½ gauche.
 	 */
 	public int getDirection() {
 		return this.direction;
+	}
+	
+	public String toString() {
+		return type.toString();
 	}
 }

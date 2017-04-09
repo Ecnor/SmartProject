@@ -15,7 +15,9 @@ public class PadDraw extends JComponent {
 	
 	Image image;
 	Graphics2D graphics2D;
-	int currentX, currentY, oldX, oldY;
+	//int lol = 0;
+	double currentX, currentY, lastInsertX, lastInsertY; 
+	int oldX, oldY;
 	
 	private ArrayList<Point> allPoints = new ArrayList<Point>();
 
@@ -26,25 +28,38 @@ public class PadDraw extends JComponent {
 			public void mousePressed(MouseEvent e){
 				oldX = e.getX();
 				oldY = e.getY();
+				
+				lastInsertX = e.getX();
+				lastInsertY = e.getY();
 			}
 		});
 		//if the mouse is pressed it sets the oldX & oldY
 		//coordinates as the mouses x & y coordinates
-		addMouseMotionListener(new MouseMotionAdapter(){
-			public void mouseDragged(MouseEvent e){
+		addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
 				currentX = e.getX();
 				currentY = e.getY();
 				
-				allPoints.add(new Point(currentX, currentY));
+				double tmp = ((currentX - lastInsertX) * (currentX - lastInsertX)) + ((currentY - lastInsertY) * (currentY - lastInsertY));
+				double distance = Math.sqrt(tmp);
 				
+				if(distance > 1) {				
+					allPoints.add(new Point((int)currentX, (int)currentY));
+					lastInsertX = currentX;
+					lastInsertY = currentY;
+				}
+				/*else {
+					lol++;
+				}*/
+							
 				if(graphics2D != null)
-					graphics2D.drawLine(oldX, oldY, currentX, currentY);
+					graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
 				
 				repaint();
-				oldX = currentX;
-				oldY = currentY;
+				
+				oldX = (int)currentX;
+				oldY = (int)currentY;
 			}
-
 		});
 		//while the mouse is dragged it sets currentX & currentY as the mouses x and y
 		//then it draws a line at the coordinates
@@ -54,10 +69,10 @@ public class PadDraw extends JComponent {
 			public void mouseReleased(MouseEvent e){
 				System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
 				System.out.println(allPoints.size());
+				//System.out.println(lol);
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
-				ult.derivate();
-				ult.guessAngles();
+				ult.guessLetter();
 				
 				MainWindowApplication.addLetterOutput('A');
 			}

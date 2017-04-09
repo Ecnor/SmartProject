@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 
 /**
- * Classe décrivant une lettre.
+ * Classe dï¿½crivant une lettre.
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
@@ -30,7 +30,7 @@ public class Letter {
 	
 	/**
 	 * Constructeur de la classe Lettre
-	 * @param c Caractère
+	 * @param c Caractï¿½re
 	 * @param o Origine
 	 * @param e Fin
 	 * @param a Angles
@@ -72,5 +72,13 @@ public class Letter {
 	 */
 	public ArrayList<Angle> getAllAngles() {
 		return this.allAngles;
+	}
+	
+	/**
+	 * Add an angle
+	 * @param a angle
+	 */
+	public void addAngle(Angle a) {
+		this.allAngles.add(a);
 	}
 }

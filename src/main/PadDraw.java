@@ -12,10 +12,15 @@ public class PadDraw extends JComponent {
 	 * Default serial version UID
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Seuil de d�tection de plateau
+	 */
+	public static final int POINT_SPACING = 5;
 	
 	Image image;
 	Graphics2D graphics2D;
-	//int lol = 0;
+	int lol = 0;
 	double currentX, currentY, lastInsertX, lastInsertY; 
 	int oldX, oldY;
 	
@@ -31,6 +36,7 @@ public class PadDraw extends JComponent {
 				
 				lastInsertX = e.getX();
 				lastInsertY = e.getY();
+				lol=0;
 			}
 		});
 		//if the mouse is pressed it sets the oldX & oldY
@@ -43,19 +49,27 @@ public class PadDraw extends JComponent {
 				double tmp = ((currentX - lastInsertX) * (currentX - lastInsertX)) + ((currentY - lastInsertY) * (currentY - lastInsertY));
 				double distance = Math.sqrt(tmp);
 				
-				if(distance > 1) {				
+				
+				if(distance > POINT_SPACING) {				
 					allPoints.add(new Point((int)currentX, (int)currentY));
 					lastInsertX = currentX;
 					lastInsertY = currentY;
+					
+					if(graphics2D != null)
+						//graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
+						graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
+					repaint();
 				}
-				/*else {
+				else {
 					lol++;
-				}*/
+				}
 							
+				/*
 				if(graphics2D != null)
-					graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
-				
+					//graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
+					graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
 				repaint();
+				*/
 				
 				oldX = (int)currentX;
 				oldY = (int)currentY;
@@ -69,7 +83,7 @@ public class PadDraw extends JComponent {
 			public void mouseReleased(MouseEvent e){
 				System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
 				System.out.println(allPoints.size());
-				//System.out.println(lol);
+				System.out.println("Points ignorés : "+lol);
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
 				ult.guessLetter();

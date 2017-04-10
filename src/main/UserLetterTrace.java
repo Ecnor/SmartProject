@@ -36,7 +36,7 @@ public class UserLetterTrace {
 	 * Taille de la fen�tre de d�rivation
 	 */
 	//public static final int DERIVATE_WIDTH = 5;
-	public static final int DERIVATE_WIDTH = 10;
+	public static final int DERIVATE_WIDTH = 2;
 	
 	/**
 	 * Seuil de d�tection de plateau
@@ -55,11 +55,13 @@ public class UserLetterTrace {
 	 * de la fenêtre de détection de changement de signe de l'autre composante
 	 */
 	//public static final int SIGN_DETECTION_WIDTH = 30;
-	public static final int SIGN_DETECTION_WIDTH = 50;
+	public static final int SIGN_DETECTION_WIDTH = 10;
 	
-	public static final int ANGLE_TYPE_THRESHOLD = 30;
+	public static final int ANGLE_DETECTION_WIDTH = 2;
 	
-	public static final int ANGLE_DETECTION_THRESHOLD = 10;
+	public static final int ANGLE_TYPE_THRESHOLD = 40;
+	
+	public static final int ANGLE_DETECTION_THRESHOLD = 5;
 	
 	/**
 	 * Derive
@@ -119,13 +121,16 @@ public class UserLetterTrace {
 		if(!indexList.isEmpty())
 		{	
 			int min = indexList.get(0);
-			int max;
+			int max, minComposante;
 			
 			for(int j = 0; j < indexList.size() - 1; j++) {
 				if((indexList.get(j + 1) - indexList.get(j)) > ANGLE_GAP) { //Nouvel angle, ici construire angle
-					max = indexList.get(j);				
-					System.out.println("avg min max 1: " + ((max + min) / 2));
-					System.out.println("Changement de signe ? -"+sign_detection((max + min) / 2,composante));
+					max = indexList.get(j);	
+					
+					minComposante = getMinComposante(min, max, composante);		
+					
+					System.out.println("avg min max 1: " + minComposante);
+					System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));
 					min = indexList.get(j + 1);			
 				}
 			}
@@ -133,49 +138,101 @@ public class UserLetterTrace {
 			max = indexList.get(indexList.size() - 1);
 			
 			if(min != 0) {
-				System.out.println("avg min max 2: " + ((max + min) / 2));
-				System.out.println("Changement de signe ? -"+sign_detection((max + min) / 2,composante));					
+				minComposante = getMinComposante(min, max, composante);	
+				System.out.println("avg min max 2: " + minComposante);
+				System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));					
 			}
-			else {			
-				System.out.println("avg min max 3: " + (max / 2));
-				System.out.println("Changement de signe ? -"+sign_detection((max) / 2,composante));
+			else {		
+				minComposante = getMinComposante(min, max, composante);	
+				System.out.println("avg min max 3: " + minComposante);
+				System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));
 			}
 		}
 		else
 			System.out.println("bah ya pas d'angles");
 	}
 	
-	private boolean sign_detection(int avg,char composante) {
-		if(avg == 0) 
+	private int getMinComposante(int min, int max, char composante) {
+		int minComposante = min;
+		
+		if(composante == 'x') {
+			for(int i = min + 1; i <= max; i++) {
+				if(Math.abs(derivedAllPoints.get(minComposante).getX()) > Math.abs(derivedAllPoints.get(i).getX())) {
+					minComposante = i;
+				}
+			}
+		}
+		else {
+			for(int i = min + 1; i <= max; i++) {
+				if(Math.abs(derivedAllPoints.get(minComposante).getY()) > Math.abs(derivedAllPoints.get(i).getY())) {
+					minComposante = i;
+				}
+			}
+		}
+		
+		return minComposante;
+	}
+	
+	private boolean sign_detection(int avg,char composante) {	
+		int amont = 0, aval = 0;
+		int ampf = 0, avpf = 0; // amont et aval n°2 #petite fenetre
+		
+		int local_width = Math.min(Math.min(avg, SIGN_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
+		int little_width = Math.min(Math.min(avg, ANGLE_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
+		
+		if(local_width == 0) 
 			return false;
 		
-		int aval=0, amont=0;
-		int local_width=Math.min(Math.min(avg, SIGN_DETECTION_WIDTH),(derivedAllPoints.size() - 1)-avg);
-		
-		for(int i=avg-local_width;i<avg;i++)
+		for(int i = avg - local_width; i < avg; i++)
 		{
-			if(composante=='y')
-				amont+=derivedAllPoints.get(i).getY();
-			else
-				amont+=derivedAllPoints.get(i).getX();
+			if(composante == 'y') {				
+				amont += derivedAllPoints.get(i).getY();
+				
+				if(i >= avg - little_width) {
+					ampf += derivedAllPoints.get(i).getY();
+					System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
+				}
+			}
+			else {				
+				amont+=derivedAllPoints.get(i).getX();		
+				if(i >= avg - little_width) {
+					ampf += derivedAllPoints.get(i).getX();
+					System.out.println("ampf+=" + derivedAllPoints.get(i).getX());
+				}
+			}
 		}
 		
-		for(int i=avg;i<avg+local_width;i++)
+		for(int i = avg + 1; i <= avg + local_width; i++)
 		{
-			if(composante=='y')
+			if(composante=='y') {				
 				aval+=derivedAllPoints.get(i).getY();
-			else
+				
+				if(i <= avg + little_width) {
+					avpf += derivedAllPoints.get(i).getY();
+					System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
+				}
+			}
+			else {			
 				aval+=derivedAllPoints.get(i).getX();
+				
+				if(i <= avg + little_width) {
+					avpf += derivedAllPoints.get(i).getX();
+					System.out.println("avpf+=" + derivedAllPoints.get(i).getX());
+				}
+			}
 		}
 		
-		aval /= local_width;
 		amont /= local_width;
+		aval /= local_width;
+		ampf /= little_width;
+		avpf /= little_width;
 		
-		System.out.println("sign_detection "+composante+" : amont : "+ amont + "aval :"+ aval);
+		System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
 		
 		if(amont * aval < 0) {
-			Angle a = null;
-			int sum = Math.abs(amont) + Math.abs(aval);
+			Angle a = null;		
+			int sum = Math.abs(ampf) + Math.abs(avpf);
+			
 			if(sum < ANGLE_TYPE_THRESHOLD) {
 				if(sum > ANGLE_DETECTION_THRESHOLD) {
 					a = new Angle(Angle.TYPES.arrondi);

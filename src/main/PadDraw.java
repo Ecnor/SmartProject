@@ -16,7 +16,7 @@ public class PadDraw extends JComponent {
 	/**
 	 * Seuil de d�tection de plateau
 	 */
-	public static final int POINT_SPACING = 5;
+	public static final int POINT_SPACING = 10;
 	
 	Image image;
 	Graphics2D graphics2D;

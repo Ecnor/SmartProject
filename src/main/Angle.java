@@ -11,7 +11,7 @@ public class Angle {
 	 *     -sec : changement brutal de d�riv�e
 	 *     -arrondi : changement de d�riv�e gentil.
 	 */
-	public static enum TYPES{aigu,arrondi};
+	public static enum TYPES{aigu,arrondi,droit};
 	
 	
 	/**
@@ -20,18 +20,31 @@ public class Angle {
 	private TYPES type;
 
 	/**
-	 * Direction de la t�te de l'angle prise par la bissectrice. 
-	Comprise entre 0 et 359. 0 La t�te est en haut, 90 �droite, 180 en bas 270�� gauche.
+	 * Pour un V c'est haut, pour un A c'est bas. Pour un Z c'est d'abord gauche puis droite.
 	 */
-	private int direction = 0;
+	public static enum DIRECTIONS{haut,bas,droite,gauche};
+	
+	/**
+	 * blabla
+	 */
+	private DIRECTIONS direction;
 	
 	/**
 	 * Constructeur de la classe Angle
 	 * @param t type de l'angle
-	 * @param d direction de l'angle
 	 */
 	public Angle(TYPES t) {
 		this.type = t;
+	}
+	
+	/**
+	 * Constructeur 2 de la classe Angle
+	 * @param t type de l'angle,
+	 * @param d direction de l'angle
+	 */
+	public Angle(TYPES t,DIRECTIONS d) {
+		this.type = t;
+		this.direction =d;
 	}
 	
 	/**
@@ -47,8 +60,15 @@ public class Angle {
 	 * @return direction Direction de la t�te de l'angle prise par la bissectrice. 
 	 Comprise entre 0 et 359. 0 La tête est en haut, 90 �droite, 180 en bas 270 � gauche.
 	 */
-	public int getDirection() {
+	public DIRECTIONS getDirection() {
 		return this.direction;
+	}
+
+	public boolean equals(Object angle)
+	{
+		boolean ret=(this.direction==((Angle)angle).direction) && (this.type==((Angle)angle).type);
+		//System.out.println("coucou" + ret);
+		return ret;
 	}
 	
 	public String toString() {

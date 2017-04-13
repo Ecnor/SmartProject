@@ -6,6 +6,8 @@ package main;
  * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Angle {
+	public static final int SUMAX = 55;
+	
 	/**
 	 * Valeurs accept�es du champs type. 
 	 *     -sec : changement brutal de d�riv�e
@@ -77,18 +79,31 @@ public class Angle {
 	{
 		int score = 0;
 		//Check direction si pas bonnne, on met 0
-		if(this.direction==DIRECTIONS.haut)
+		
+		// CA MARCHE PAS ! IL FAUT RAJOUTER UN SENS DANS ALPHA (genre boolean ou un truc du genre)
+		if(this.direction==DIRECTIONS.bas)
 		{
-			
-		} else if(this.direction==DIRECTIONS.bas)
+			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+				return score;
+			}
+		} 
+		else if(this.direction==DIRECTIONS.haut)
 		{
-			
-		} else if(this.direction==DIRECTIONS.gauche)
+			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+				return score;
+			}
+		} 
+		else if(this.direction==DIRECTIONS.droite)
 		{
-			
-		} else if(this.direction==DIRECTIONS.droite)
+			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+				return score;
+			}
+		} 
+		else if(this.direction==DIRECTIONS.gauche)
 		{
-			
+			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+				return score;
+			}
 		} 
 		
 		int sum = Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf());

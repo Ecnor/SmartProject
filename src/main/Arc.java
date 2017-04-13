@@ -14,4 +14,9 @@ public class Arc {
 	public char getCharc(){
 		return this.lecharc;
 	}
+	
+	public boolean equals(Object jeanne)
+	{
+		return this.pnoeud.equals(((Arc)jeanne).pnoeud) && this.lecharc==((Arc)jeanne).lecharc;
+	}
 }

@@ -48,5 +48,22 @@ public class Graph {
 		}
 		
 	}
+	
+	public int evaluate(ArrayList<AngleMesure> trace)
+	{
+		System.out.println("Evaluation :");
+		return evaluateR(trace,lesNoeuds.get(0),0);
+	}
+	
+	private int evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep){
+		if(tracep==trace.size())
+			return 0;
+		else
+		{
+			
+			trace.get(tracep);//Angle mesuré à comparer avec les noyeaux des noeuds des différents arcs qui sortent de np
+			return 0;
+		}
+	}
 }
 ;

@@ -71,6 +71,42 @@ public class Angle {
 		return ret;
 	}
 	
+	
+	
+	public int evalueAngle(AngleMesure alpha)
+	{
+		int score = 0;
+		//Check direction si pas bonnne, on met 0
+		if(this.direction==DIRECTIONS.haut)
+		{
+			
+		} else if(this.direction==DIRECTIONS.bas)
+		{
+			
+		} else if(this.direction==DIRECTIONS.gauche)
+		{
+			
+		} else if(this.direction==DIRECTIONS.droite)
+		{
+			
+		} 
+		
+		int sum = Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf());
+		if(this.type==TYPES.aigu)
+		{
+			score+=sum;
+		}
+		else if(this.type==TYPES.arrondi)
+		{
+			
+		}
+		else if(this.type==TYPES.droit)
+		{
+			
+		}
+		return 0;
+	}
+	
 	public String toString() {
 		return type.toString();
 	}

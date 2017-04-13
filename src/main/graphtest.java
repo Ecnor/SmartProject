@@ -31,16 +31,19 @@ public class graphtest {
 		//Création d'inputs de test, simule des inputs d'utilisateurs possibles
 		//On demande au capteur de filtrer le bruit.
 		ArrayList<AngleMesure> U= new ArrayList<AngleMesure>();
-		U.add(new AngleMesure(20,-20));
+		U.add(new AngleMesure(20,-20,'y'));
+		legraph.evaluate(U);
 		
 		//Legraph.evaluer(U)
 		
 		ArrayList<AngleMesure> V= new ArrayList<AngleMesure>();
-		V.add(new AngleMesure(70,-70));
+		V.add(new AngleMesure(70,-70,'y'));
+		legraph.evaluate(V);
 		
 		ArrayList<AngleMesure> W= new ArrayList<AngleMesure>();
-		W.add(new AngleMesure(20,-20));
-		W.add(new AngleMesure(-70,70));
-		W.add(new AngleMesure(20,-20));
+		W.add(new AngleMesure(20,-20,'y'));
+		W.add(new AngleMesure(-70,70,'y'));
+		W.add(new AngleMesure(20,-20,'y'));
+		legraph.evaluate(W);
 	}
 }

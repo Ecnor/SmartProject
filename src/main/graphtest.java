@@ -22,28 +22,29 @@ public class graphtest {
 		
 		
 		//Insertion
-		legraph.insert(Ubase,'U');
-		legraph.insert(Vbase, 'V');
-		legraph.insert(Wbase, 'W');
+		legraph.insert(Ubase,'U',1);
+		legraph.insert(Ubase,'U',1);
+		legraph.insert(Vbase, 'V',1);
+		legraph.insert(Wbase, 'W',3);
 		
 		
 		
 		//Création d'inputs de test, simule des inputs d'utilisateurs possibles
 		//On demande au capteur de filtrer le bruit.
 		ArrayList<AngleMesure> U= new ArrayList<AngleMesure>();
-		U.add(new AngleMesure(20,-20,'y'));
+		U.add(new AngleMesure(-10,10,'y',true));
 		legraph.evaluate(U);
 		
 		//Legraph.evaluer(U)
 		
 		ArrayList<AngleMesure> V= new ArrayList<AngleMesure>();
-		V.add(new AngleMesure(70,-70,'y'));
+		V.add(new AngleMesure(25,-25,'y',false));
 		legraph.evaluate(V);
 		
 		ArrayList<AngleMesure> W= new ArrayList<AngleMesure>();
-		W.add(new AngleMesure(20,-20,'y'));
-		W.add(new AngleMesure(-70,70,'y'));
-		W.add(new AngleMesure(20,-20,'y'));
+		W.add(new AngleMesure(10,-10,'y',false));
+		W.add(new AngleMesure(-25,25,'y',false));
+		W.add(new AngleMesure(10,-10,'y',false));
 		legraph.evaluate(W);
 	}
 }

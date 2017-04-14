@@ -14,15 +14,19 @@ public class Noeud {
 	}
 	
 	
-	public void insert(Arc larc){
+	public void insert(Noeud noeud, LetterCount letter){
 		//Avant d'insérer il faut check que l'arc n'est pas déjà présent.
+		Arc larc=new Arc(noeud,letter);
 		if(!allArcs.contains(larc))
 		{
 			System.out.println("Noeud : Insertion de " + larc.getCharc());
 			allArcs.add(larc);
 		}
 		else
+		{
+			allArcs.get(allArcs.indexOf(larc)).countIncrement();
 			System.out.println("Noeud.insert : Arc qu'il est déjà dedans");
+		}
 	}
 	
 	public boolean equals(Object noeud)
@@ -37,6 +41,19 @@ public class Noeud {
 	
 	public Angle getNoyal(){
 		return this.noyal;
+	}
+	
+	//C'est ptét sale mais...
+	public ArrayList<Arc> getAllArcs(){
+		return this.allArcs;
+	}
+	
+	public void init()
+	{
+		for(int i=0;i<allArcs.size();i++)
+		{
+			allArcs.get(i).init();
+		}
 	}
 	
 }

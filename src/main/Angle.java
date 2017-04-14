@@ -6,7 +6,7 @@ package main;
  * @author Alain KABBOUH, Emine BERNARDONE
  */
 public class Angle {
-	public static final int SUMAX = 55;
+	public static final double SUMAX = 55;
 	
 	/**
 	 * Valeurs accept�es du champs type. 
@@ -75,51 +75,66 @@ public class Angle {
 	
 	
 	
-	public int evalueAngle(AngleMesure alpha)
+	public double evalueAngle(AngleMesure alpha)
 	{
-		int score = 0;
+		double score = 0;
 		//Check direction si pas bonnne, on met 0
 		
-		// CA MARCHE PAS ! IL FAUT RAJOUTER UN SENS DANS ALPHA (genre boolean ou un truc du genre)
-		if(this.direction==DIRECTIONS.bas)
+		DIRECTIONS local_inverse=this.direction;
+		if(alpha.getInverse())
+		{
+			switch (this.direction){
+			case haut : local_inverse = DIRECTIONS.bas ; break;
+			case bas : local_inverse = DIRECTIONS.haut ; break;
+			case gauche : local_inverse = DIRECTIONS.droite ; break;
+			case droite : local_inverse = DIRECTIONS.gauche ; break;
+			
+			}
+		}
+		if(local_inverse==DIRECTIONS.bas)
 		{
 			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
 				return score;
 			}
 		} 
-		else if(this.direction==DIRECTIONS.haut)
+		else if(local_inverse==DIRECTIONS.haut)
 		{
 			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
 				return score;
 			}
 		} 
-		else if(this.direction==DIRECTIONS.droite)
+		else if(local_inverse==DIRECTIONS.droite)
 		{
 			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
 				return score;
 			}
 		} 
-		else if(this.direction==DIRECTIONS.gauche)
+		else if(local_inverse==DIRECTIONS.gauche)
 		{
 			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
 				return score;
 			}
 		} 
 		
-		int sum = Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf());
+
+		
+		double sum = (double) (Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf()));
 		if(this.type==TYPES.aigu)
 		{
-			score+=sum;
+			score=sum/SUMAX;
 		}
 		else if(this.type==TYPES.arrondi)
 		{
-			
+			score=(SUMAX-sum)/SUMAX;
 		}
 		else if(this.type==TYPES.droit)
 		{
-			
+			if(alpha.getDroit())
+				score=1;
+						
 		}
-		return 0;
+		score*=100;
+		return score;
 	}
 	
 	public String toString() {

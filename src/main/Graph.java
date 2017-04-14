@@ -2,15 +2,16 @@ package main;
 
 import java.util.ArrayList;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class Graph {
 	
 	private ArrayList<Noeud> lesNoeuds;
-	
+	private ArrayList<LetterCount> lesLettres;
 	
 	public Graph(){
 		lesNoeuds=new ArrayList<Noeud>();
+		lesLettres=new ArrayList<LetterCount>();
+		
 		lesNoeuds.add(new Noeud(null));
 		
 		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.aigu,Angle.DIRECTIONS.haut)));
@@ -33,37 +34,70 @@ public class Graph {
 	
 	
 	
-	void insert(ArrayList<Angle> base, char lechar){
+	void insert(ArrayList<Angle> base, char lechar, int totalangle){
 		System.out.println("Graph : Insertion de "+lechar);
-		
-		Noeud pointeur=lesNoeuds.get(0);
-		for(int i=0;i<base.size();i++)
+		boolean is_already_inserted=false;
+		for(int i = 0; i < lesLettres.size();i++)
 		{
-		
-		int indice=lesNoeuds.indexOf(new Noeud(base.get(i)));
-		Noeud next=lesNoeuds.get(indice);
-		
-		pointeur.insert(new  Arc(next,lechar));
-		pointeur=next;
+			if(lesLettres.get(i).getChar()==lechar)
+				is_already_inserted=true;
+		}
+		if(!is_already_inserted)
+		{
+			Noeud pointeur=lesNoeuds.get(0);
+			LetterCount lettercount=new LetterCount(lechar,totalangle);
+			lesLettres.add(lettercount);
+			
+			for(int i=0;i<base.size();i++)
+			{
+			
+				int indice=lesNoeuds.indexOf(new Noeud(base.get(i)));
+				Noeud next=lesNoeuds.get(indice);
+			
+				pointeur.insert(next,lettercount);
+				pointeur=next;
+				
+			}
 		}
 		
 	}
 	
-	public int evaluate(ArrayList<AngleMesure> trace)
+	public char evaluate(ArrayList<AngleMesure> trace)
 	{
 		System.out.println("Evaluation :");
-		return evaluateR(trace,lesNoeuds.get(0),0);
+		//inits
+		for(int i = 0; i < lesLettres.size();i++)
+		{
+			lesLettres.get(i).init();
+		}
+		for(int i =0;i<lesNoeuds.size();i++)
+		{
+			lesNoeuds.get(i).init();
+		}
+		evaluateR(trace,lesNoeuds.get(0),0);
+		
+		System.out.println("Resultat ! "+lesLettres);
+		return 'v';
 	}
 	
-	private int evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep){
-		if(tracep==trace.size())
-			return 0;
-		else
+	//Optimisable...
+	private void evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep){
+		if(tracep!=trace.size())
 		{
-			
-			trace.get(tracep);//Angle mesuré à comparer avec les noyeaux des noeuds des différents arcs qui sortent de np
-			return 0;
+			System.out.println(""+np.getNoyal());
+			AngleMesure trangle= trace.get(tracep);//Angle mesuré à comparer avec les noyeaux des noeuds des différents arcs qui sortent de np
+			Arc localArc;
+			Noeud narc;
+			for(int i = 0; i < np.getAllArcs().size();i++)
+			{
+				localArc=np.getAllArcs().get(i);
+				narc=localArc.getNoeud();
+				
+				double score=narc.getNoyal().evalueAngle(trangle);
+				//System.out.println("Score increment : "+score);
+				localArc.scoreIncrement(score);
+				evaluateR(trace,narc,tracep+1);
+			}	
 		}
 	}
 }
-;

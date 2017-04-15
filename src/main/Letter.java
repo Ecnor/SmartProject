@@ -14,16 +14,6 @@ public class Letter {
 	private char character;
 	
 	/**
-	 * Origine de la lettre
-	 */
-	private Point origin = null;
-	
-	/**
-	 * Fin de la lettre
-	 */
-	private Point end = null;
-	
-	/**
 	 * Angles de la lettre
 	 */
 	private ArrayList<Angle> allAngles = new ArrayList<Angle>();
@@ -31,14 +21,10 @@ public class Letter {
 	/**
 	 * Constructeur de la classe Lettre
 	 * @param c Caract�re
-	 * @param o Origine
-	 * @param e Fin
 	 * @param a Angles
 	 */
-	public Letter(char c, Point o, Point e, ArrayList<Angle> a) {
-		this.character = c;
-		this.origin = o;
-		this.end = e;		
+	public Letter(char c, ArrayList<Angle> a) {
+		this.character = c;	
 		this.allAngles = a;
 	}
 	
@@ -48,22 +34,6 @@ public class Letter {
 	 */
 	public char getCharacter() {
 		return this.character;
-	}
-
-	/**
-	 * Returns origin.
-	 * @return origin 
-	 */
-	public Point getOrigin() {
-		return this.origin;
-	}
-
-	/**
-	 * Returns end.
-	 * @return end 
-	 */
-	public Point getEnd() {
-		return this.end;
 	}
 
 	/**

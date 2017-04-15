@@ -20,9 +20,9 @@ public class UserLetterTrace {
 	private ArrayList<Point> derivedAllPoints = new ArrayList<Point>();
 	
 	/**
-	 * Lettre a reconnaitre
+	 * Liste des angles mesurés
 	 */
-	private Letter guessedLetter = null;
+	private ArrayList<AngleMesure> mesuredAngles = new ArrayList<AngleMesure>();
 	
 	/**
 	 * Constructeur de la classe UserLetterTrace
@@ -128,9 +128,8 @@ public class UserLetterTrace {
 					max = indexList.get(j);	
 					
 					minComposante = getMinComposante(min, max, composante);		
+					sign_detection(minComposante,composante);
 					
-					System.out.println("avg min max 1: " + minComposante);
-					System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));
 					min = indexList.get(j + 1);			
 				}
 			}
@@ -139,13 +138,11 @@ public class UserLetterTrace {
 			
 			if(min != 0) {
 				minComposante = getMinComposante(min, max, composante);	
-				System.out.println("avg min max 2: " + minComposante);
-				System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));					
+				sign_detection(minComposante,composante);			
 			}
 			else {		
-				minComposante = getMinComposante(min, max, composante);	
-				System.out.println("avg min max 3: " + minComposante);
-				System.out.println("Changement de signe ? -"+sign_detection(minComposante,composante));
+				minComposante = getMinComposante(min, max, composante);
+				sign_detection(minComposante,composante);
 			}
 		}
 		else
@@ -173,100 +170,86 @@ public class UserLetterTrace {
 		return minComposante;
 	}
 	
-	private boolean sign_detection(int avg,char composante) {	
+	private void sign_detection(int avg, char composante) {	
 		int amont = 0, aval = 0;
-		int ampf = 0, avpf = 0; // amont et aval n°2 #petite fenetre
+		int ampfX = 0, avpfX = 0, ampfY = 0, avpfY = 0; // amont et aval n°2 #petite fenetre
 		
 		int local_width = Math.min(Math.min(avg, SIGN_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
 		int little_width = Math.min(Math.min(avg, ANGLE_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
 		
-		if(local_width == 0) 
-			return false;
-		
-		for(int i = avg - local_width; i < avg; i++)
-		{
-			if(composante == 'y') {				
-				amont += derivedAllPoints.get(i).getY();
+		if(local_width != 0) {
+			for(int i = avg - local_width; i < avg; i++)
+			{
+				if(composante == 'y') {				
+					amont += derivedAllPoints.get(i).getY();		
+				}
+				else {				
+					amont += derivedAllPoints.get(i).getX();	
+				}
 				
 				if(i >= avg - little_width) {
-					ampf += derivedAllPoints.get(i).getY();
+					ampfX += derivedAllPoints.get(i).getX();
+					ampfY += derivedAllPoints.get(i).getY();
 					System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
 				}
 			}
-			else {				
-				amont+=derivedAllPoints.get(i).getX();		
-				if(i >= avg - little_width) {
-					ampf += derivedAllPoints.get(i).getX();
-					System.out.println("ampf+=" + derivedAllPoints.get(i).getX());
+			
+			for(int i = avg + 1; i <= avg + local_width; i++)
+			{
+				if(composante=='y') {				
+					aval+=derivedAllPoints.get(i).getY();
 				}
-			}
-		}
-		
-		for(int i = avg + 1; i <= avg + local_width; i++)
-		{
-			if(composante=='y') {				
-				aval+=derivedAllPoints.get(i).getY();
+				else {			
+					aval+=derivedAllPoints.get(i).getX();
+				}
 				
 				if(i <= avg + little_width) {
-					avpf += derivedAllPoints.get(i).getY();
+					avpfX += derivedAllPoints.get(i).getX();
+					avpfY += derivedAllPoints.get(i).getY();
 					System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
 				}
 			}
-			else {			
-				aval+=derivedAllPoints.get(i).getX();
+			
+			amont /= local_width;
+			aval /= local_width;
+			
+			ampfX /= little_width;
+			avpfX /= little_width;
+			ampfY /= little_width;
+			avpfY /= little_width;
+			
+			//System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
+			if(amont * aval < 0) {
+				if(composante == 'x') {
+					int sum = Math.abs(ampfX) + Math.abs(avpfX);
 				
-				if(i <= avg + little_width) {
-					avpf += derivedAllPoints.get(i).getX();
-					System.out.println("avpf+=" + derivedAllPoints.get(i).getX());
+					if(sum > ANGLE_DETECTION_THRESHOLD) {
+						boolean inv = ampfY < 0;			
+						AngleMesure a = new AngleMesure(ampfX, avpfX, composante, inv);
+						mesuredAngles.add(a);
+					}
+				}
+				else {
+					int sum = Math.abs(ampfY) + Math.abs(avpfY);
+					
+					if(sum > ANGLE_DETECTION_THRESHOLD) {
+						boolean inv = ampfX < 0;			
+						AngleMesure a = new AngleMesure(ampfY, avpfY, composante, inv);
+						mesuredAngles.add(a);
+					}
 				}
 			}
 		}
-		
-		amont /= local_width;
-		aval /= local_width;
-		ampf /= little_width;
-		avpf /= little_width;
-		
-		System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
-		
-		if(amont * aval < 0) {
-			Angle a = null;		
-			int sum = Math.abs(ampf) + Math.abs(avpf);
-			
-			if(sum < ANGLE_TYPE_THRESHOLD) {
-				if(sum > ANGLE_DETECTION_THRESHOLD) {
-					a = new Angle(Angle.TYPES.arrondi);
-				}
-			}
-			else {
-				a = new Angle(Angle.TYPES.aigu);
-			}
-			
-			if(a != null)
-				guessedLetter.addAngle(a);
-			
-			return true;
-		}
-		
-		return false;
 	}
 	 
 	/**
 	 * guessLetter
 	 */
-	public void guessLetter() {	
-		derivate();
-		
-		Point origin = allPoints.get(0);
-		Point end = allPoints.get(allPoints.size() - 1);
-		
-		ArrayList<Angle> angles = new ArrayList<Angle>();
-		
-		guessedLetter = new Letter(' ', origin, end, angles);
-		
+	public ArrayList<AngleMesure> guessLetter() {	
+		derivate();	
 		guessAngles();
 		
-		System.out.println("LOL " + guessedLetter.getAllAngles());
+		return mesuredAngles;
 	}
 
 	/**
@@ -283,13 +266,5 @@ public class UserLetterTrace {
 	 */
 	public ArrayList<Point> getDerivedAllPoints() {
 		return this.derivedAllPoints;
-	}
-
-	/**
-	 * Returns guessedLetter.
-	 * @return guessedLetter 
-	 */
-	public Letter getGuessedLetter() {
-		return this.guessedLetter;
 	}
 }

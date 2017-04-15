@@ -2,6 +2,8 @@ package main;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -20,14 +22,16 @@ public class PadDraw extends JComponent {
 	
 	Image image;
 	Graphics2D graphics2D;
-	int lol = 0;
 	double currentX, currentY, lastInsertX, lastInsertY; 
 	int oldX, oldY;
+	Graph legraph;
 	
 	private ArrayList<Point> allPoints = new ArrayList<Point>();
 
 	//Now for the constructors
 	public PadDraw(){
+		legraph = parser();
+		
 		setDoubleBuffered(false);
 		addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
@@ -36,7 +40,6 @@ public class PadDraw extends JComponent {
 				
 				lastInsertX = e.getX();
 				lastInsertY = e.getY();
-				lol=0;
 			}
 		});
 		//if the mouse is pressed it sets the oldX & oldY
@@ -60,16 +63,6 @@ public class PadDraw extends JComponent {
 						graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
 					repaint();
 				}
-				else {
-					lol++;
-				}
-							
-				/*
-				if(graphics2D != null)
-					//graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
-					graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
-				repaint();
-				*/
 				
 				oldX = (int)currentX;
 				oldY = (int)currentY;
@@ -83,10 +76,9 @@ public class PadDraw extends JComponent {
 			public void mouseReleased(MouseEvent e){
 				System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
 				System.out.println(allPoints.size());
-				System.out.println("Points ignorés : "+lol);
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
-				ult.guessLetter();
+				System.out.println(legraph.evaluate(ult.guessLetter()));				
 				
 				MainWindowApplication.addLetterOutput('A');
 			}
@@ -124,4 +116,36 @@ public class PadDraw extends JComponent {
 	//it sets the colors as white
 	//then it fills the window with white
 	//thin it sets the color back to black
+	
+	public Graph parser() {
+		Graph g = new Graph();
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/main/config.sp"));
+		
+		    String line = br.readLine();
+
+		    while (line != null) {	        	        
+		        String[] parts = line.split(",");
+		        
+		        char lechar = parts[0].charAt(0);
+		        ArrayList<Angle> angles = new ArrayList<Angle>();
+		        
+		        for(int i = 1; i < parts.length; i+=2) {	        	
+		        	angles.add(new Angle(Angle.TYPES.valueOf(parts[i]), Angle.DIRECTIONS.valueOf(parts[i + 1])));
+		        }
+		        
+		        g.insert(angles, lechar, angles.size());
+		        
+		        line = br.readLine();
+		    }	    
+		    
+		    br.close();
+		} 
+		catch(Exception e) {
+			System.out.println(e.toString());
+		} 
+		
+		return g;
+	}
 }

@@ -27,9 +27,7 @@ public class Graph {
 		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.droit,Angle.DIRECTIONS.haut)));
 		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.droit,Angle.DIRECTIONS.bas)));
 		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.droit,Angle.DIRECTIONS.gauche)));
-		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.droit,Angle.DIRECTIONS.droite)));
-		
-		
+		lesNoeuds.add(new Noeud(new Angle(Angle.TYPES.droit,Angle.DIRECTIONS.droite)));	
 	}
 	
 	
@@ -62,7 +60,7 @@ public class Graph {
 		
 	}
 	
-	public char evaluate(ArrayList<AngleMesure> trace)
+	public ArrayList<SmartScore> evaluate(ArrayList<AngleMesure> trace)
 	{
 		System.out.println("Evaluation :");
 		//inits
@@ -76,8 +74,13 @@ public class Graph {
 		}
 		evaluateR(trace,lesNoeuds.get(0),0);
 		
-		System.out.println("Resultat ! "+lesLettres);
-		return 'v';
+		ArrayList<SmartScore> alss = new ArrayList<SmartScore>();		
+		for(int i = 0; i < lesLettres.size(); i++) {
+			SmartScore ss = new SmartScore(lesLettres.get(i).getChar(), lesLettres.get(i).getScore() / Math.max(lesLettres.get(i).getTotalAngle(), trace.size()));
+			alss.add(ss);
+		}
+		
+		return alss;
 	}
 	
 	//Optimisable...

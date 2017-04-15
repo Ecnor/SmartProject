@@ -29,6 +29,11 @@ public class LetterCount {
 		return this.score;
 	}
 	
+	public int getTotalAngle()
+	{
+		return this.totalangle;
+	}
+	
 	public String toString(){
 		return "("+lechar+","+score/totalangle+")";
 	}

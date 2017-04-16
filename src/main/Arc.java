@@ -1,21 +1,51 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Arc {
 
+	private static ArrayList<Arc> lesArcs=new ArrayList<Arc>();
+	private int indice;
 	private Noeud pnoeud;//noeud pointé
 	private LetterCount lecharc;
 	private int count;
-	private int currentcount;
 	
 	public Arc(Noeud pnoeud, LetterCount lecharc)
 	{
 		this.pnoeud=pnoeud;
 		this.lecharc=lecharc;
 		this.count=1;
+		this.indice=lesArcs.size();
+		lesArcs.add(this);
+	}
+	
+	public int getIndice()
+	{
+		return this.indice;
+	}
+	
+	public int getCount()
+	{
+		return this.count;
+	}
+	
+	public static Arc getArc(int indice)
+	{
+		return lesArcs.get(indice);
+	}
+	
+	public static int getArcsSize()
+	{
+		return lesArcs.size();
 	}
 	
 	public char getCharc(){
 	return this.lecharc.getChar();
+	}
+	
+	public LetterCount getLC()
+	{
+		return this.lecharc;
 	}
 	
 	public boolean equals(Object jeanne)
@@ -27,23 +57,10 @@ public class Arc {
 		return this.pnoeud;
 	}
 	
-	public void scoreIncrement(double score)
-	{
-		//System.out.println("score increment : angle :"+pnoeud.getNoyal() +" count :"+count+", currentcount :"+currentcount+", score :"+score);
-		if(currentcount>0)
-		{
-			currentcount--;
-			lecharc.scoreIncrement(score);
-		}
-	}
-	
+
 	public void countIncrement(){
 		count++;
 	}
-	
-	public void init(){
-		currentcount=count;
-	}
-	
+		
 	
 }

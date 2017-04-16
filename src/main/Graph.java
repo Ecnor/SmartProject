@@ -3,14 +3,14 @@ package main;
 import java.util.ArrayList;
 
 
+
 public class Graph {
 	
 	private ArrayList<Noeud> lesNoeuds;
-	private ArrayList<LetterCount> lesLettres;
+
 	
 	public Graph(){
 		lesNoeuds=new ArrayList<Noeud>();
-		lesLettres=new ArrayList<LetterCount>();
 		
 		lesNoeuds.add(new Noeud(null));
 		
@@ -34,6 +34,7 @@ public class Graph {
 	
 	void insert(ArrayList<Angle> base, char lechar, int totalangle){
 		System.out.println("Graph : Insertion de "+lechar);
+		ArrayList<LetterCount> lesLettres=LetterCount.getlesLC();
 		boolean is_already_inserted=false;
 		for(int i = 0; i < lesLettres.size();i++)
 		{
@@ -44,7 +45,6 @@ public class Graph {
 		{
 			Noeud pointeur=lesNoeuds.get(0);
 			LetterCount lettercount=new LetterCount(lechar,totalangle);
-			lesLettres.add(lettercount);
 			
 			for(int i=0;i<base.size();i++)
 			{
@@ -63,28 +63,40 @@ public class Graph {
 	public ArrayList<SmartScore> evaluate(ArrayList<AngleMesure> trace)
 	{
 		System.out.println("Evaluation :");
-		//inits
-		for(int i = 0; i < lesLettres.size();i++)
+		
+		
+		
+		ArrayList<Integer> passagesParArcs=new ArrayList<Integer>();
+		ArrayList<Double> score=new ArrayList<Double>();
+		for(int i=0;i<Arc.getArcsSize();i++)
 		{
-			lesLettres.get(i).init();
+			passagesParArcs.add(Arc.getArc(i).getCount());
 		}
-		for(int i =0;i<lesNoeuds.size();i++)
-		{
-			lesNoeuds.get(i).init();
-		}
-		evaluateR(trace,lesNoeuds.get(0),0);
+		
+		ArrayList<Double>scoreDSC=new ArrayList<Double>();
+		for(int i = 0 ;i < LetterCount.getLesLCSize() ; i++)
+			scoreDSC.add(0.0);
+		score=evaluateR(trace,lesNoeuds.get(0),0,passagesParArcs,scoreDSC);
 		
 		ArrayList<SmartScore> alss = new ArrayList<SmartScore>();		
-		for(int i = 0; i < lesLettres.size(); i++) {
-			SmartScore ss = new SmartScore(lesLettres.get(i).getChar(), lesLettres.get(i).getScore() / Math.max(lesLettres.get(i).getTotalAngle(), trace.size()));
+		for(int i = 0; i < LetterCount.getLesLCSize(); i++) {
+			SmartScore ss = new SmartScore(LetterCount.getLC(i).getChar(), score.get(i) / Math.max(LetterCount.getLC(i).getTotalAngle(), trace.size()));
+			System.out.println("SMART SCORE : "+i+"  "+score.get(i));
 			alss.add(ss);
 		}
 		
 		return alss;
 	}
 	
-	//Optimisable...
-	private void evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep){
+	
+	private ArrayList<Double> evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep,
+			ArrayList<Integer> passageParArcs,ArrayList<Double> scoreDSC)
+	{
+		System.out.println("SCORE DSC TIC: "+scoreDSC);
+		ArrayList<Double> lesScores=new ArrayList<Double>();
+		for(int i = 0 ;i < LetterCount.getLesLCSize() ; i++)
+			lesScores.add(0.0);
+		
 		if(tracep!=trace.size())
 		{
 			System.out.println(""+np.getNoyal());
@@ -94,13 +106,36 @@ public class Graph {
 			for(int i = 0; i < np.getAllArcs().size();i++)
 			{
 				localArc=np.getAllArcs().get(i);
+				ArrayList<Integer>localPPA=new ArrayList<Integer>(passageParArcs);
 				narc=localArc.getNoeud();
+				ArrayList<Double>localSC=new ArrayList<Double>();
+				for(int j = 0; j < scoreDSC.size() ; j++ )
+				{
+					localSC.add(new Double(scoreDSC.get(j).doubleValue()));
+				}
+				System.out.println("SCORE DSC TOC: "+localSC);
 				
-				double score=narc.getNoyal().evalueAngle(trangle);
-				//System.out.println("Score increment : "+score);
-				localArc.scoreIncrement(score);
-				evaluateR(trace,narc,tracep+1);
-			}	
+				if(localPPA.get(localArc.getIndice())>0)
+				{
+					double score=narc.getNoyal().evalueAngle(trangle);
+					System.out.println("Score increment : "+score);
+					localSC.set(localArc.getLC().getIndice(),localSC.get(localArc.getLC().getIndice())+score);
+					localPPA.set(localArc.getIndice(), localPPA.get(localArc.getIndice())-1);
+				}
+				
+				ArrayList<Double> localSM=evaluateR(trace,narc,tracep+1,localPPA,localSC);
+				for(int j = 0; j < localSM.size();j++)
+				{
+					if(localSM.get(j)>lesScores.get(j))
+						lesScores.set(j, localSM.get(j));
+				}
+			}
 		}
+		return lesScores;
 	}
+	
+	
+	
 }
+
+

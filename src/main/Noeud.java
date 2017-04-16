@@ -48,13 +48,7 @@ public class Noeud {
 		return this.allArcs;
 	}
 	
-	public void init()
-	{
-		for(int i=0;i<allArcs.size();i++)
-		{
-			allArcs.get(i).init();
-		}
-	}
+
 	
 }
 

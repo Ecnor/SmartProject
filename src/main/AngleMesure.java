@@ -6,7 +6,9 @@ public class AngleMesure {
 	private int avg;
 	private char composante;
 	private boolean inverse;//si faux on est dans le sens de lecture à la française, gauche, droite, haut bas, si true c'est l'inverse
+	
 	private boolean droit;
+	private int dtype;
 	
 	public AngleMesure(int ampf, int avpf, char composante, boolean inverse)
 	{
@@ -25,6 +27,13 @@ public class AngleMesure {
 		this.inverse = inverse;
 	}
 	
+	public AngleMesure(int dt, int avg)
+	{
+		this.avg = avg;
+		this.droit = true;
+		this.dtype = dt;
+	}
+	
 	public int getAmpf(){
 		return this.ampf;
 	}
@@ -35,6 +44,10 @@ public class AngleMesure {
 	
 	public int getAvg(){
 		return this.avg;
+	}
+	
+	public int getDtype(){
+		return this.dtype;
 	}
 	
 	public char getComposante(){

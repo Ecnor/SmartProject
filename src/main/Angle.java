@@ -80,59 +80,82 @@ public class Angle {
 		double score = 0;
 		//Check direction si pas bonnne, on met 0
 		
-		DIRECTIONS local_inverse=this.direction;
-		if(alpha.getInverse())
-		{
-			switch (this.direction){
-			case haut : local_inverse = DIRECTIONS.bas ; break;
-			case bas : local_inverse = DIRECTIONS.haut ; break;
-			case gauche : local_inverse = DIRECTIONS.droite ; break;
-			case droite : local_inverse = DIRECTIONS.gauche ; break;
+		if(alpha.getDroit() && this.type == TYPES.droit) {	
+			System.out.println("HMGLFMGFLJGF " + alpha.getDtype());
+			DIRECTIONS local = this.direction;
 			
+			switch(local) {
+				case haut :  
+					if(alpha.getDtype() == 3) {
+						score = 1;
+					}
+					break;
+				case bas :  
+					if(alpha.getDtype() == 1) {
+						score = 1;
+					}
+					break;
+				case gauche :  
+					if(alpha.getDtype() == 2) {
+						score = 1;
+					}
+					break;
+				case droite :  
+					if(alpha.getDtype() == 4) {
+						score = 1;
+					}
+					break;
 			}
 		}
-		if(local_inverse==DIRECTIONS.bas)
-		{
-			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-				return score;
+		else {
+			DIRECTIONS local_inverse=this.direction;
+			if(alpha.getInverse())
+			{
+				switch (this.direction){
+				case haut : local_inverse = DIRECTIONS.bas ; break;
+				case bas : local_inverse = DIRECTIONS.haut ; break;
+				case gauche : local_inverse = DIRECTIONS.droite ; break;
+				case droite : local_inverse = DIRECTIONS.gauche ; break;
+				
+				}
 			}
-		} 
-		else if(local_inverse==DIRECTIONS.haut)
-		{
-			if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-				return score;
-			}
-		} 
-		else if(local_inverse==DIRECTIONS.droite)
-		{
-			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-				return score;
-			}
-		} 
-		else if(local_inverse==DIRECTIONS.gauche)
-		{
-			if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-				return score;
-			}
-		} 
+			if(local_inverse==DIRECTIONS.bas)
+			{
+				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+					return score;
+				}
+			} 
+			else if(local_inverse==DIRECTIONS.haut)
+			{
+				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+					return score;
+				}
+			} 
+			else if(local_inverse==DIRECTIONS.droite)
+			{
+				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+					return score;
+				}
+			} 
+			else if(local_inverse==DIRECTIONS.gauche)
+			{
+				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+					return score;
+				}
+			} 
 		
-
+			
+			double sum = (double) (Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf()));
+			if(this.type==TYPES.aigu)
+			{
+				score=sum/SUMAX;
+			}
+			else if(this.type==TYPES.arrondi)
+			{
+				score=(SUMAX-sum)/SUMAX;
+			}
+		}
 		
-		double sum = (double) (Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf()));
-		if(this.type==TYPES.aigu)
-		{
-			score=sum/SUMAX;
-		}
-		else if(this.type==TYPES.arrondi)
-		{
-			score=(SUMAX-sum)/SUMAX;
-		}
-		else if(this.type==TYPES.droit)
-		{
-			if(alpha.getDroit())
-				score=1;
-						
-		}
 		score*=100;
 		return score;
 	}

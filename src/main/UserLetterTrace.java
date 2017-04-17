@@ -128,7 +128,7 @@ public class UserLetterTrace {
 					max = indexList.get(j);	
 					
 					minComposante = getMinComposante(min, max, composante);		
-					sign_detection(minComposante,composante);
+					sign_detection(minComposante,composante, min, max);
 					
 					min = indexList.get(j + 1);			
 				}
@@ -138,11 +138,11 @@ public class UserLetterTrace {
 			
 			if(min != 0) {
 				minComposante = getMinComposante(min, max, composante);	
-				sign_detection(minComposante,composante);			
+				sign_detection(minComposante,composante, min, max);			
 			}
 			else {		
 				minComposante = getMinComposante(min, max, composante);
-				sign_detection(minComposante,composante);
+				sign_detection(minComposante,composante, min, max);
 			}
 		}
 		else
@@ -170,72 +170,202 @@ public class UserLetterTrace {
 		return minComposante;
 	}
 	
-	private void sign_detection(int avg, char composante) {	
+	private void sign_detection(int avg, char composante, int min, int max) {	
 		int amont = 0, aval = 0;
 		int ampfX = 0, avpfX = 0, ampfY = 0, avpfY = 0; // amont et aval n°2 #petite fenetre
+		
+		if(avg == 0)
+			avg++;
+		
+		if(avg == derivedAllPoints.size() - 1)
+			avg--;
+		
 		
 		int local_width = Math.min(Math.min(avg, SIGN_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
 		int little_width = Math.min(Math.min(avg, ANGLE_DETECTION_WIDTH), (derivedAllPoints.size() - 1) - avg);
 		
-		if(local_width != 0) {
-			for(int i = avg - local_width; i < avg; i++)
-			{
-				if(composante == 'y') {				
-					amont += derivedAllPoints.get(i).getY();		
-				}
-				else {				
-					amont += derivedAllPoints.get(i).getX();	
-				}
-				
-				if(i >= avg - little_width) {
-					ampfX += derivedAllPoints.get(i).getX();
-					ampfY += derivedAllPoints.get(i).getY();
-					System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
-				}
+		boolean barredroite = false;
+		for(int i = avg - local_width; i < avg; i++)
+		{
+			if(composante == 'y') {				
+				amont += derivedAllPoints.get(i).getY();		
+			}
+			else {				
+				amont += derivedAllPoints.get(i).getX();	
 			}
 			
-			for(int i = avg + 1; i <= avg + local_width; i++)
-			{
-				if(composante=='y') {				
-					aval+=derivedAllPoints.get(i).getY();
-				}
-				else {			
-					aval+=derivedAllPoints.get(i).getX();
-				}
-				
-				if(i <= avg + little_width) {
-					avpfX += derivedAllPoints.get(i).getX();
-					avpfY += derivedAllPoints.get(i).getY();
-					System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
-				}
+			if(i >= avg - little_width) {
+				ampfX += derivedAllPoints.get(i).getX();
+				ampfY += derivedAllPoints.get(i).getY();
+				//System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
+			}
+		}
+		
+		for(int i = avg + 1; i <= avg + local_width; i++)
+		{
+			if(composante=='y') {				
+				aval+=derivedAllPoints.get(i).getY();
+			}
+			else {			
+				aval+=derivedAllPoints.get(i).getX();
 			}
 			
-			amont /= local_width;
-			aval /= local_width;
+			if(i <= avg + little_width) {
+				avpfX += derivedAllPoints.get(i).getX();
+				avpfY += derivedAllPoints.get(i).getY();
+				//System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
+			}
+		}
+		
+		amont /= local_width;
+		aval /= local_width;
+		
+		ampfX /= little_width;
+		avpfX /= little_width;
+		ampfY /= little_width;
+		avpfY /= little_width;
+					
+		
+		//System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
+		if(amont * aval < 0) {
+			if(composante == 'x') {
+				int sum = Math.abs(ampfX) + Math.abs(avpfX);
 			
-			ampfX /= little_width;
-			avpfX /= little_width;
-			ampfY /= little_width;
-			avpfY /= little_width;
-			
-			//System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
-			if(amont * aval < 0) {
-				if(composante == 'x') {
-					int sum = Math.abs(ampfX) + Math.abs(avpfX);
-				
-					if(sum > ANGLE_DETECTION_THRESHOLD) {
-						boolean inv = ampfY < 0;			
-						AngleMesure a = new AngleMesure(ampfX, avpfX, avg, composante, inv);
-						mesuredAngles.add(a);
-					}
+				if(sum > ANGLE_DETECTION_THRESHOLD) {
+					boolean inv = ampfY < 0;			
+					AngleMesure a = new AngleMesure(ampfX, avpfX, avg, composante, inv);
+					mesuredAngles.add(a);
 				}
 				else {
-					int sum = Math.abs(ampfY) + Math.abs(avpfY);
+					barredroite = true;
+				}
+			}
+			else {
+				int sum = Math.abs(ampfY) + Math.abs(avpfY);
+				
+				if(sum > ANGLE_DETECTION_THRESHOLD) {
+					boolean inv = ampfX < 0;			
+					AngleMesure a = new AngleMesure(ampfY, avpfY, avg, composante, inv);
+					mesuredAngles.add(a);
+				}
+			}
+		}
+		else {
+			barredroite = true;
+		}
+			
+		if(barredroite) {
+			System.out.println("BARRE DROITE LOL; min=" + min + " max=" + max);
+			max++;
+			ampfX = 0;
+			ampfY = 0;
+			avpfX = 0;
+			avpfY = 0;
+			
+			boolean inv = false;
+			
+			if(composante == 'x') {
+				if(min > 5) {
+					System.out.println("MIN");
+					for(int i = min - 5; i < min; i++)
+					{						
+						ampfX += derivedAllPoints.get(i).getX();
+						ampfY += derivedAllPoints.get(i).getY();
+					}
 					
-					if(sum > ANGLE_DETECTION_THRESHOLD) {
-						boolean inv = ampfX < 0;			
-						AngleMesure a = new AngleMesure(ampfY, avpfY, avg, composante, inv);
-						mesuredAngles.add(a);
+					for(int i = min + 1; i <= min + 5; i++)
+					{						
+						avpfY += derivedAllPoints.get(i).getY();							
+					}
+					
+					inv = avpfY > 0;
+					
+					ampfY /= 5;
+					
+					System.out.println("ampfX = " + ampfX);
+					System.out.println("ampfY = " + ampfY);
+					
+					
+					if(ampfY < 20) {
+						// coin haut gauche 1
+						if(ampfX > 100) {
+							System.out.println("coin haut gauche");
+							AngleMesure a;
+							
+							if(!inv)
+								a = new AngleMesure(1, min);
+							else
+								a = new AngleMesure(4, min);
+							
+							mesuredAngles.add(a);
+						}
+						// coin haut droit 2
+						else if(ampfX < -100) {
+							System.out.println("coin haut droit");
+							AngleMesure a;
+							
+							if(!inv)
+								a = new AngleMesure(2, min);
+							else
+								a = new AngleMesure(3, min);
+							
+							mesuredAngles.add(a);
+						}
+						else {
+							System.out.println("truc chelou min");
+						}
+					}
+				}
+				
+				if(max < derivedAllPoints.size() - 5) {
+					System.out.println("MAX");
+					
+					for(int i = max + 1; i <= max + 5; i++)
+					{						
+						avpfX += derivedAllPoints.get(i).getX();
+						avpfY += derivedAllPoints.get(i).getY();							
+					}
+					
+					for(int i = max - 5; i < max; i++)
+					{						
+						ampfY += derivedAllPoints.get(i).getY();
+					}
+					
+					inv = ampfY < 0;
+					
+					avpfY /= 5;
+					
+					System.out.println("avpfX = " + avpfX);
+					System.out.println("avpfY = " + avpfY);
+					
+					if(avpfY < 20) {
+						// coin bas gauche 4
+						if(avpfX > 100) {
+							System.out.println("coin bas gauche");
+							AngleMesure a;
+							
+							if(!inv)
+								a = new AngleMesure(4, max);
+							else
+								a = new AngleMesure(1, max);
+							
+							mesuredAngles.add(a);
+						}
+						// coin bas droit 3
+						else if(avpfX < -100) {
+							System.out.println("coin bas droit");
+							AngleMesure a;
+							
+							if(!inv)
+								a = new AngleMesure(3, max);
+							else
+								a = new AngleMesure(2, max);
+							
+							mesuredAngles.add(a);
+						}
+						else {
+							System.out.println("truc chelou max");
+						}
 					}
 				}
 			}

@@ -138,6 +138,6 @@ public class Angle {
 	}
 	
 	public String toString() {
-		return type.toString();
+		return type.toString()+" "+direction.toString();
 	}
 }

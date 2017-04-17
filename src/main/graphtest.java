@@ -25,6 +25,16 @@ public class graphtest {
 		W.add(new AngleMesure(-25,25,'y',false));
 		W.add(new AngleMesure(10,-10,'y',false));
 		System.out.println(legraph.evaluate(W));
+		
+		ArrayList<AngleMesure> B= new ArrayList<AngleMesure>();
+		B.add(new AngleMesure(20,-20,'y',false));
+		B.add(new AngleMesure(-8,8,'y',false));
+		B.add(new AngleMesure(8,-8,'x',false));
+		B.add(new AngleMesure(-20,20,'x',true));
+		B.add(new AngleMesure(10,-10,'x',false));
+		System.out.println(legraph.evaluate(B));
+		
+		
 	}
 	
 	public static Graph parser() {

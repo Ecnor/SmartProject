@@ -93,7 +93,7 @@ public class Graph {
 			ArrayList<Integer> passageParArcs,ArrayList<Double> scoreDSC)
 	{
 
-		System.out.println("PARCOURS: "+np.getNoyal());
+
 		ArrayList<Double> lesScores=new ArrayList<Double>(scoreDSC);
 
 		
@@ -120,6 +120,8 @@ public class Graph {
 				if(localPPA.get(localArc.getIndice())>0)
 				{
 					double score=narc.getNoyal().evalueAngle(trangle);
+					System.out.println("PARCOURS"+tracep+": "+narc.getNoyal());
+					System.out.println("Ampf :"+trace.get(tracep).getAmpf()+" Avpf : "+trace.get(tracep).getAvpf());
 					System.out.println("Score increment : "+score);
 					localSC.set(localArc.getLC().getIndice(),localSC.get(localArc.getLC().getIndice())+score);
 					localPPA.set(localArc.getIndice(), localPPA.get(localArc.getIndice())-1);

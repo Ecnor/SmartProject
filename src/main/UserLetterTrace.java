@@ -225,7 +225,7 @@ public class UserLetterTrace {
 				
 					if(sum > ANGLE_DETECTION_THRESHOLD) {
 						boolean inv = ampfY < 0;			
-						AngleMesure a = new AngleMesure(ampfX, avpfX, composante, inv);
+						AngleMesure a = new AngleMesure(ampfX, avpfX, avg, composante, inv);
 						mesuredAngles.add(a);
 					}
 				}
@@ -234,7 +234,7 @@ public class UserLetterTrace {
 					
 					if(sum > ANGLE_DETECTION_THRESHOLD) {
 						boolean inv = ampfX < 0;			
-						AngleMesure a = new AngleMesure(ampfY, avpfY, composante, inv);
+						AngleMesure a = new AngleMesure(ampfY, avpfY, avg, composante, inv);
 						mesuredAngles.add(a);
 					}
 				}
@@ -248,8 +248,28 @@ public class UserLetterTrace {
 	public ArrayList<AngleMesure> guessLetter() {	
 		derivate();	
 		guessAngles();
+		sortMesuredAngles();	
 		
 		return mesuredAngles;
+	}
+	
+	private void sortMesuredAngles() {
+		AngleMesure tmp;
+		int min = 0;
+		
+		for(int n = 0; n < mesuredAngles.size(); n++) {
+			min = n;
+			
+			for(int i = n; i < mesuredAngles.size(); i++) {
+				if(mesuredAngles.get(i).getAvg() < mesuredAngles.get(min).getAvg()) {
+					min = i; 
+				}
+			}
+			
+			tmp = mesuredAngles.get(min);
+			mesuredAngles.set(min, mesuredAngles.get(n));
+			mesuredAngles.set(n, tmp);
+		}
 	}
 
 	/**

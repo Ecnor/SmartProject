@@ -92,28 +92,30 @@ public class Graph {
 	private ArrayList<Double> evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep,
 			ArrayList<Integer> passageParArcs,ArrayList<Double> scoreDSC)
 	{
-		System.out.println("SCORE DSC TIC: "+scoreDSC);
-		ArrayList<Double> lesScores=new ArrayList<Double>();
-		for(int i = 0 ;i < LetterCount.getLesLCSize() ; i++)
-			lesScores.add(0.0);
+
+		System.out.println("PARCOURS: "+np.getNoyal());
+		ArrayList<Double> lesScores=new ArrayList<Double>(scoreDSC);
+
 		
 		if(tracep!=trace.size())
 		{
-			System.out.println(""+np.getNoyal());
+			
 			AngleMesure trangle= trace.get(tracep);//Angle mesuré à comparer avec les noyeaux des noeuds des différents arcs qui sortent de np
 			Arc localArc;
 			Noeud narc;
+		
 			for(int i = 0; i < np.getAllArcs().size();i++)
 			{
+			
 				localArc=np.getAllArcs().get(i);
 				ArrayList<Integer>localPPA=new ArrayList<Integer>(passageParArcs);
 				narc=localArc.getNoeud();
-				ArrayList<Double>localSC=new ArrayList<Double>();
+								ArrayList<Double>localSC=new ArrayList<Double>();
 				for(int j = 0; j < scoreDSC.size() ; j++ )
 				{
 					localSC.add(new Double(scoreDSC.get(j).doubleValue()));
 				}
-				System.out.println("SCORE DSC TOC: "+localSC);
+		
 				
 				if(localPPA.get(localArc.getIndice())>0)
 				{

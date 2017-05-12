@@ -78,7 +78,7 @@ public class Angle {
 	public double evalueAngle(AngleMesure alpha)
 	{
 		double score = 0;
-		//Check direction si pas bonnne, on met 0
+		//Check direction si pas bonnne, on garde le score à 0
 		
 		if(alpha.getDroit() && this.type == TYPES.droit) {	
 			System.out.println("HMGLFMGFLJGF " + alpha.getDtype());
@@ -108,41 +108,33 @@ public class Angle {
 			}
 		}
 		else {
-			DIRECTIONS local_inverse=this.direction;
-			if(alpha.getInverse())
-			{
-				switch (this.direction){
-				case haut : local_inverse = DIRECTIONS.bas ; break;
-				case bas : local_inverse = DIRECTIONS.haut ; break;
-				case gauche : local_inverse = DIRECTIONS.droite ; break;
-				case droite : local_inverse = DIRECTIONS.gauche ; break;
-				
-				}
-			}
-			if(local_inverse==DIRECTIONS.bas)
-			{
-				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-					return score;
-				}
-			} 
-			else if(local_inverse==DIRECTIONS.haut)
-			{
-				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-					return score;
-				}
-			} 
-			else if(local_inverse==DIRECTIONS.droite)
-			{
-				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-					return score;
-				}
-			} 
-			else if(local_inverse==DIRECTIONS.gauche)
-			{
-				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-					return score;
-				}
-			} 
+			//Avant on pensait que le sens d'écriture avait une importance...
+				if(this.direction==DIRECTIONS.bas)
+				{
+					if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+						return score;
+					}
+				} 
+				else if(this.direction==DIRECTIONS.haut)
+				{
+					if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+						return score;
+					}
+				} 
+				else if(this.direction==DIRECTIONS.droite)
+				{
+					if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+						return score;
+					}
+				} 
+				else if(this.direction==DIRECTIONS.gauche)
+				{
+					if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+						return score;
+					}
+				} 
+			
+		
 		
 			
 			double sum = (double) (Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf()));

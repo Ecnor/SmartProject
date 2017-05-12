@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Alain KABBOUH, Emine BERNARDONE
  */
+
 public class Letter {
 	/**
 	 * Lettre

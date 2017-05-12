@@ -63,4 +63,9 @@ public class AngleMesure {
 	{
 		return this.droit;
 	}
+	
+	public String toString()
+	{
+		return "Angle mesuree : Avg"+this.avg+" ampf : "+this.ampf+"avpf : "+this.avpf+"composante : "+this.composante+"inverse : "+this.inverse;
+	}
 }

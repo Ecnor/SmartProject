@@ -62,8 +62,8 @@ public class Graph {
 	
 	public ArrayList<SmartScore> evaluate(ArrayList<AngleMesure> trace)
 	{
-		System.out.println("Evaluation :");
-		
+		System.out.println("Evaluation de : "+trace);
+	
 		
 		
 		ArrayList<Integer> passagesParArcs=new ArrayList<Integer>();
@@ -104,6 +104,7 @@ public class Graph {
 			Arc localArc;
 			Noeud narc;
 		
+			//Parcours du graphe
 			for(int i = 0; i < np.getAllArcs().size();i++)
 			{
 			
@@ -120,9 +121,13 @@ public class Graph {
 				if(localPPA.get(localArc.getIndice())>0)
 				{
 					double score=narc.getNoyal().evalueAngle(trangle);
-					System.out.println("PARCOURS"+tracep+": "+narc.getNoyal());
+					
+					if(localArc.getCharc() == 'C' || localArc.getCharc() == 'W')
+					{//le print conditionnel, la révolution du débugage.
+					System.out.println("PARCOURS"+tracep+": Angle :"+narc.getNoyal() + " De la Lettre : " + localArc.getCharc());
 					System.out.println("Ampf :"+trace.get(tracep).getAmpf()+" Avpf : "+trace.get(tracep).getAvpf());
 					System.out.println("Score increment : "+score);
+					}
 					localSC.set(localArc.getLC().getIndice(),localSC.get(localArc.getLC().getIndice())+score);
 					localPPA.set(localArc.getIndice(), localPPA.get(localArc.getIndice())-1);
 				}

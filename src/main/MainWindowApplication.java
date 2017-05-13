@@ -72,7 +72,7 @@ public class MainWindowApplication {
 		lbl_output.setBounds(10, 10, 50, 15);
 		jp_output.add(lbl_output);
 		
-		JButton btnClearLol = new JButton("Clear LOL");
+		JButton btnClearLol = new JButton("Clear");
 		btnClearLol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jp_drawing.clear();

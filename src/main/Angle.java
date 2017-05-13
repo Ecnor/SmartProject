@@ -69,7 +69,7 @@ public class Angle {
 	public boolean equals(Object angle)
 	{
 		boolean ret=(this.direction==((Angle)angle).direction) && (this.type==((Angle)angle).type);
-		//System.out.println("coucou" + ret);
+		////System.out.println("coucou" + ret);
 		return ret;
 	}
 	
@@ -81,7 +81,7 @@ public class Angle {
 		//Check direction si pas bonnne, on garde le score à 0
 		
 		if(alpha.getDroit() && this.type == TYPES.droit) {	
-			System.out.println("HMGLFMGFLJGF " + alpha.getDtype());
+			//System.out.println("HMGLFMGFLJGF " + alpha.getDtype());
 			DIRECTIONS local = this.direction;
 			
 			switch(local) {

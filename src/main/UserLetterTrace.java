@@ -86,13 +86,13 @@ public class UserLetterTrace {
 			derivedAllPoints.add(new Point((aheadX - behindX) / DERIVATE_WIDTH, (aheadY - behindY) / DERIVATE_WIDTH));
 		}
 		
-		System.out.println("Tableau  de point dérivé : \n");
+		//System.out.println("Tableau  de point dérivé : \n");
 		
 		for(int i=0;i<derivedAllPoints.size();i++)
 		{
-			System.out.print(""+derivedAllPoints.get(i)+"i : "+ i +" ;");
-			if(i != 0 && i%5 == 0)
-				System.out.println();
+			//System.out.print(""+derivedAllPoints.get(i)+"i : "+ i +" ;");
+			//if(i != 0 && i%5 == 0)
+				//System.out.println();
 		}
 	}
 	 
@@ -112,8 +112,8 @@ public class UserLetterTrace {
 				indexListY.add(i);		
 		}
 		
-		System.out.println("Annulations de la dérivée en X :" + indexListX.toString());
-		System.out.println("Annulations de la dérivée en Y :" + indexListY.toString());
+		//System.out.println("Annulations de la dérivée en X :" + indexListX.toString());
+		//System.out.println("Annulations de la dérivée en Y :" + indexListY.toString());
 		
 		parseIndexList(indexListX,'x');
 		parseIndexList(indexListY,'y');	
@@ -147,8 +147,8 @@ public class UserLetterTrace {
 				sign_detection(minComposante,composante, min, max);
 			}
 		}
-		else
-			System.out.println("bah ya pas d'angles");
+		//else
+			//System.out.println("bah ya pas d'angles");
 	}
 	
 	private int getMinComposante(int min, int max, char composante) {
@@ -199,7 +199,7 @@ public class UserLetterTrace {
 			if(i >= avg - little_width) {
 				ampfX += derivedAllPoints.get(i).getX();
 				ampfY += derivedAllPoints.get(i).getY();
-				//System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
+				////System.out.println("ampf+=" + derivedAllPoints.get(i).getY());
 			}
 		}
 		
@@ -215,7 +215,7 @@ public class UserLetterTrace {
 			if(i <= avg + little_width) {
 				avpfX += derivedAllPoints.get(i).getX();
 				avpfY += derivedAllPoints.get(i).getY();
-				//System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
+				////System.out.println("avpf+=" + derivedAllPoints.get(i).getY());
 			}
 		}
 		
@@ -228,7 +228,7 @@ public class UserLetterTrace {
 		avpfY /= little_width;
 					
 		
-		//System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
+		////System.out.println("sign_detection " + composante + " : ampf : " + ampf + " avpf :" + avpf);
 		if(amont * aval < 0) {
 			if(composante == 'x') {
 				int sum = Math.abs(ampfX) + Math.abs(avpfX);
@@ -266,7 +266,7 @@ public class UserLetterTrace {
 			
 			if(composante == 'x') {
 				if(min > 5 && min < derivedAllPoints.size() - 5) {
-					System.out.println("MIN");
+					//System.out.println("MIN");
 					for(int i = min - 5; i < min; i++)
 					{						
 						ampfX += derivedAllPoints.get(i).getX();
@@ -282,10 +282,10 @@ public class UserLetterTrace {
 					
 					ampfY /= 5;
 					
-					System.out.println("ampfX = " + ampfX);
-					System.out.println("ampfY = " + ampfY);
+					//System.out.println("ampfX = " + ampfX);
+					//System.out.println("ampfY = " + ampfY);
 					
-					System.out.println("avpfY = " + avpfY);
+					//System.out.println("avpfY = " + avpfY);
 					
 					if(ampfY < 15) {
 						if(ampfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
@@ -312,13 +312,13 @@ public class UserLetterTrace {
 							mesuredAngles.add(a);
 						}
 						else {
-							System.out.println("truc chelou min");
+							//System.out.println("truc chelou min");
 						}
 					}
 				}
 				
 				if(max > 5 && max < derivedAllPoints.size() - 5) {
-					System.out.println("MAX");
+					//System.out.println("MAX");
 					
 					for(int i = max + 1; i <= max + 5; i++)
 					{						
@@ -333,10 +333,10 @@ public class UserLetterTrace {
 					
 					avpfY /= 5;
 					
-					System.out.println("avpfX = " + avpfX);
-					System.out.println("avpfY = " + avpfY);
+					//System.out.println("avpfX = " + avpfX);
+					//System.out.println("avpfY = " + avpfY);
 					
-					System.out.println("ampfY = " + ampfY);
+					//System.out.println("ampfY = " + ampfY);
 					
 					if(avpfY < 15) {
 						if(avpfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
@@ -361,7 +361,7 @@ public class UserLetterTrace {
 							mesuredAngles.add(a);
 						}
 						else {
-							System.out.println("truc chelou max");
+							//System.out.println("truc chelou max");
 						}
 					}
 				}

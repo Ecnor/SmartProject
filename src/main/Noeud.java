@@ -19,13 +19,13 @@ public class Noeud {
 		Arc larc=new Arc(noeud,letter);
 		if(!allArcs.contains(larc))
 		{
-			System.out.println("Noeud : Insertion de " + larc.getCharc());
+			//System.out.println("Noeud : Insertion de " + larc.getCharc());
 			allArcs.add(larc);
 		}
 		else
 		{
 			allArcs.get(allArcs.indexOf(larc)).countIncrement();
-			System.out.println("Noeud.insert : Arc qu'il est déjà dedans");
+			//System.out.println("Noeud.insert : Arc qu'il est déjà dedans");
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class Noeud {
 		if(((Noeud)noeud).noyal==null)
 			return false;
 		ret=this.noyal.equals(((Noeud )noeud).noyal);
-		///System.out.println("cocu" + ret);
+		/////System.out.println("cocu" + ret);
 		return ret;
 	}
 	

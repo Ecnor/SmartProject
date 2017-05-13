@@ -33,7 +33,7 @@ public class Graph {
 	
 	
 	void insert(ArrayList<Angle> base, char lechar, int totalangle){
-		System.out.println("Graph : Insertion de "+lechar);
+		////System.out.println("Graph : Insertion de "+lechar);
 		ArrayList<LetterCount> lesLettres=LetterCount.getlesLC();
 		boolean is_already_inserted=false;
 		for(int i = 0; i < lesLettres.size();i++)
@@ -62,7 +62,7 @@ public class Graph {
 	
 	public ArrayList<SmartScore> evaluate(ArrayList<AngleMesure> trace)
 	{
-		System.out.println("Evaluation de : " + trace);	
+		////System.out.println("Evaluation de : " + trace);	
 		
 		ArrayList<Integer> passagesParArcs=new ArrayList<Integer>();
 		ArrayList<Double> score=new ArrayList<Double>();
@@ -79,7 +79,7 @@ public class Graph {
 		ArrayList<SmartScore> alss = new ArrayList<SmartScore>();		
 		for(int i = 0; i < LetterCount.getLesLCSize(); i++) {
 			SmartScore ss = new SmartScore(LetterCount.getLC(i).getChar(), score.get(i) / Math.max(LetterCount.getLC(i).getTotalAngle(), trace.size()));
-			System.out.println("SMART SCORE : "+i+"  "+score.get(i));
+			////System.out.println("SMART SCORE : "+i+"  "+score.get(i));
 			alss.add(ss);
 		}
 		
@@ -115,12 +115,12 @@ public class Graph {
 				{
 					double score=narc.getNoyal().evalueAngle(trangle);
 					
-					if(localArc.getCharc() == 'B' || localArc.getCharc() == 'V')
+					/*if(localArc.getCharc() == 'B' || localArc.getCharc() == 'V')
 					{//le print conditionnel, la révolution du débugage.
-					System.out.println("PARCOURS"+tracep+": Angle :"+narc.getNoyal() + " De la Lettre : " + localArc.getCharc());
-					System.out.println("Ampf :"+trace.get(tracep).getAmpf()+" Avpf : "+trace.get(tracep).getAvpf());
-					System.out.println("Score increment : "+score);
-					}
+					//System.out.println("PARCOURS"+tracep+": Angle :"+narc.getNoyal() + " De la Lettre : " + localArc.getCharc());
+					//System.out.println("Ampf :"+trace.get(tracep).getAmpf()+" Avpf : "+trace.get(tracep).getAvpf());
+					//System.out.println("Score increment : "+score);
+					}*/
 					localSC.set(localArc.getLC().getIndice(),localSC.get(localArc.getLC().getIndice())+score);
 					localPPA.set(localArc.getIndice(), localPPA.get(localArc.getIndice())-1);
 				}

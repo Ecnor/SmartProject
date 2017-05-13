@@ -51,8 +51,7 @@ public class PadDraw extends JComponent {
 				
 				double tmp = ((currentX - lastInsertX) * (currentX - lastInsertX)) + ((currentY - lastInsertY) * (currentY - lastInsertY));
 				double distance = Math.sqrt(tmp);
-				
-				
+							
 				if(distance > POINT_SPACING) {				
 					allPoints.add(new Point((int)currentX, (int)currentY));
 					lastInsertX = currentX;
@@ -74,13 +73,27 @@ public class PadDraw extends JComponent {
 		
 		addMouseListener(new MouseAdapter(){
 			public void mouseReleased(MouseEvent e){
-				System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
-				System.out.println(allPoints.size());
+				//System.out.println("Tableau de points : \n"+allPoints.toString()+"\n");
+				//System.out.println(allPoints.size());
 				
 				UserLetterTrace ult = new UserLetterTrace(allPoints);
-				System.out.println(legraph.evaluate(ult.guessLetter()));				
+				ArrayList<SmartScore> scores = legraph.evaluate(ult.guessLetter());	
 				
-				MainWindowApplication.addLetterOutput('A');
+				System.out.println(scores);
+				
+				char letter = ' ';
+				double max = -1;
+				
+				for(int i = 0; i < scores.size(); i++) {
+					if(scores.get(i).getScore() > max) {
+						max = scores.get(i).getScore();
+						letter = scores.get(i).getLetter();
+					}
+				}
+				
+				System.out.println("Lettre sélectionnée: " + letter + " avec un score de " + max);
+				
+				MainWindowApplication.addLetterOutput(letter);
 			}
 		});
 	}
@@ -143,7 +156,7 @@ public class PadDraw extends JComponent {
 		    br.close();
 		} 
 		catch(Exception e) {
-			System.out.println(e.toString());
+			//System.out.println(e.toString());
 		} 
 		
 		return g;

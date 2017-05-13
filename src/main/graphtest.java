@@ -14,17 +14,17 @@ public class graphtest {
 		//On demande au capteur de filtrer le bruit.
 		ArrayList<AngleMesure> U= new ArrayList<AngleMesure>();
 		U.add(new AngleMesure(-10,10,'y',true));
-		System.out.println(legraph.evaluate(U));
+		//System.out.println(legraph.evaluate(U));
 		
 		ArrayList<AngleMesure> V= new ArrayList<AngleMesure>();
 		V.add(new AngleMesure(25,-25,'y',false));
-		System.out.println(legraph.evaluate(V));
+		//System.out.println(legraph.evaluate(V));
 		
 		ArrayList<AngleMesure> W= new ArrayList<AngleMesure>();
 		W.add(new AngleMesure(10,-10,'y',false));
 		W.add(new AngleMesure(-25,25,'y',false));
 		W.add(new AngleMesure(10,-10,'y',false));
-		System.out.println(legraph.evaluate(W));
+		//System.out.println(legraph.evaluate(W));
 		
 		ArrayList<AngleMesure> B= new ArrayList<AngleMesure>();
 		B.add(new AngleMesure(20,-20,'y',false));
@@ -32,7 +32,7 @@ public class graphtest {
 		B.add(new AngleMesure(8,-8,'x',false));
 		B.add(new AngleMesure(-20,20,'x',true));
 		B.add(new AngleMesure(10,-10,'x',false));
-		System.out.println(legraph.evaluate(B));
+		//System.out.println(legraph.evaluate(B));
 		
 		
 	}
@@ -63,7 +63,7 @@ public class graphtest {
 		    br.close();
 		} 
 		catch(Exception e) {
-			System.out.println(e.toString());
+			//System.out.println(e.toString());
 		} 
 		
 		return g;

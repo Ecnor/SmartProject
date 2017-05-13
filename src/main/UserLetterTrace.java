@@ -90,7 +90,7 @@ public class UserLetterTrace {
 		
 		for(int i=0;i<derivedAllPoints.size();i++)
 		{
-			System.out.print(""+derivedAllPoints.get(i)+"i : "+i+" ;");
+			System.out.print(""+derivedAllPoints.get(i)+"i : "+ i +" ;");
 			if(i != 0 && i%5 == 0)
 				System.out.println();
 		}
@@ -285,8 +285,9 @@ public class UserLetterTrace {
 					System.out.println("ampfX = " + ampfX);
 					System.out.println("ampfY = " + ampfY);
 					
+					System.out.println("avpfY = " + avpfY);
 					
-					if(ampfY < 20) {
+					if(ampfY < 15) {
 						// coin haut gauche 1
 						if(ampfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin haut gauche");
@@ -338,7 +339,9 @@ public class UserLetterTrace {
 					System.out.println("avpfX = " + avpfX);
 					System.out.println("avpfY = " + avpfY);
 					
-					if(avpfY < 20) {
+					System.out.println("ampfY = " + ampfY);
+					
+					if(avpfY < 15) {
 						// coin bas gauche 4
 						if(avpfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin bas gauche");

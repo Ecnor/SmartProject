@@ -58,8 +58,8 @@ public class PadDraw extends JComponent {
 					lastInsertY = currentY;
 					
 					if(graphics2D != null)
-						//graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
-						graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
+						graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
+						//graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
 					repaint();
 				}
 				

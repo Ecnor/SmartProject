@@ -2,12 +2,9 @@ package main;
 
 import java.util.ArrayList;
 
-
-
 public class Graph {
 	
 	private ArrayList<Noeud> lesNoeuds;
-
 	
 	public Graph(){
 		lesNoeuds=new ArrayList<Noeud>();
@@ -134,10 +131,5 @@ public class Graph {
 			}
 		}
 		return lesScores;
-	}
-	
-	
-	
+	}	
 }
-
-

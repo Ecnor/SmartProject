@@ -49,6 +49,7 @@ public class MainWindowApplication {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Smart Project");
 		
 		final PadDraw jp_drawing = new PadDraw();
 		jp_drawing.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -72,7 +73,7 @@ public class MainWindowApplication {
 		lbl_output.setBounds(10, 10, 50, 15);
 		jp_output.add(lbl_output);
 		
-		JButton btnClearLol = new JButton("Clear");
+		JButton btnClearLol = new JButton("Clear Drawing");
 		btnClearLol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jp_drawing.clear();
@@ -80,6 +81,15 @@ public class MainWindowApplication {
 		});
 		btnClearLol.setBounds(450, 119, 142, 23);
 		frame.getContentPane().add(btnClearLol);
+		
+		JButton btnClearOutput = new JButton("Clear Output");
+		btnClearOutput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tf_output.setText("");
+			}
+		});
+		btnClearOutput.setBounds(600, 119, 142, 23);
+		frame.getContentPane().add(btnClearOutput);
 	}
 	
 	public static void addLetterOutput(char c) {

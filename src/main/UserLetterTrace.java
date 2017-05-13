@@ -261,9 +261,7 @@ public class UserLetterTrace {
 			ampfY = 0;
 			avpfX = 0;
 			avpfY = 0;
-			
-		
-			
+					
 			if(composante == 'x') {
 				if(min > 5 && min < derivedAllPoints.size() - 5) {
 					//System.out.println("MIN");
@@ -276,9 +274,7 @@ public class UserLetterTrace {
 					for(int i = min + 1; i <= min + 5; i++)
 					{						
 						avpfY += derivedAllPoints.get(i).getY();							
-					}
-					
-					
+					}			
 					
 					ampfY /= 5;
 					

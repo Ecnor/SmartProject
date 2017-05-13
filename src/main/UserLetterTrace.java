@@ -262,7 +262,7 @@ public class UserLetterTrace {
 			avpfX = 0;
 			avpfY = 0;
 			
-			boolean inv = false;
+		
 			
 			if(composante == 'x') {
 				if(min > 5 && min < derivedAllPoints.size() - 5) {
@@ -278,7 +278,7 @@ public class UserLetterTrace {
 						avpfY += derivedAllPoints.get(i).getY();							
 					}
 					
-					inv = avpfY > 0;
+					
 					
 					ampfY /= 5;
 					
@@ -288,27 +288,26 @@ public class UserLetterTrace {
 					System.out.println("avpfY = " + avpfY);
 					
 					if(ampfY < 15) {
-						// coin haut gauche 1
 						if(ampfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
-							System.out.println("coin haut gauche");
 							AngleMesure a;
 							
-							if(!inv)
-								a = new AngleMesure(1, min);
-							else
-								a = new AngleMesure(4, min);
-							
-							mesuredAngles.add(a);
-						}
-						// coin haut droit 2
-						else if(ampfX < -RIGHT_ANGLE_DETECTION_THRESHOLD) {
-							System.out.println("coin haut droit");
-							AngleMesure a;
-							
-							if(!inv)
+							// coin haut droit ou bas droit
+							if(avpfY > 0)
 								a = new AngleMesure(2, min);
 							else
 								a = new AngleMesure(3, min);
+							
+							mesuredAngles.add(a);
+						}
+					
+						else if(ampfX < -RIGHT_ANGLE_DETECTION_THRESHOLD) {
+							AngleMesure a;
+							
+							//Coin haut gauche ou bas gauche
+							if(avpfY > 0)
+								a = new AngleMesure(1, min);
+							else
+								a = new AngleMesure(4, min);
 							
 							mesuredAngles.add(a);
 						}
@@ -332,8 +331,6 @@ public class UserLetterTrace {
 						ampfY += derivedAllPoints.get(i).getY();
 					}
 					
-					inv = ampfY < 0;
-					
 					avpfY /= 5;
 					
 					System.out.println("avpfX = " + avpfX);
@@ -342,24 +339,21 @@ public class UserLetterTrace {
 					System.out.println("ampfY = " + ampfY);
 					
 					if(avpfY < 15) {
-						// coin bas gauche 4
 						if(avpfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
-							System.out.println("coin bas gauche");
 							AngleMesure a;
 							
-							if(!inv)
+							//Coin haut gauche ou coin bas gauche
+							if(ampfY > 0)
 								a = new AngleMesure(4, max);
 							else
 								a = new AngleMesure(1, max);
 							
 							mesuredAngles.add(a);
 						}
-						// coin bas droit 3
 						else if(avpfX < -RIGHT_ANGLE_DETECTION_THRESHOLD) {
-							System.out.println("coin bas droit");
 							AngleMesure a;
 							
-							if(!inv)
+							if(ampfY > 0)
 								a = new AngleMesure(3, max);
 							else
 								a = new AngleMesure(2, max);

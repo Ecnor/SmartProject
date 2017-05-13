@@ -62,9 +62,7 @@ public class Graph {
 	
 	public ArrayList<SmartScore> evaluate(ArrayList<AngleMesure> trace)
 	{
-		System.out.println("Evaluation de : "+trace);
-	
-		
+		System.out.println("Evaluation de : " + trace);	
 		
 		ArrayList<Integer> passagesParArcs=new ArrayList<Integer>();
 		ArrayList<Double> score=new ArrayList<Double>();
@@ -92,37 +90,32 @@ public class Graph {
 	private ArrayList<Double> evaluateR(ArrayList<AngleMesure> trace, Noeud np, int tracep,
 			ArrayList<Integer> passageParArcs,ArrayList<Double> scoreDSC)
 	{
-
-
 		ArrayList<Double> lesScores=new ArrayList<Double>(scoreDSC);
-
-		
+	
 		if(tracep!=trace.size())
-		{
-			
+		{			
 			AngleMesure trangle= trace.get(tracep);//Angle mesuré à comparer avec les noyeaux des noeuds des différents arcs qui sortent de np
 			Arc localArc;
 			Noeud narc;
 		
 			//Parcours du graphe
 			for(int i = 0; i < np.getAllArcs().size();i++)
-			{
-			
+			{		
 				localArc=np.getAllArcs().get(i);
 				ArrayList<Integer>localPPA=new ArrayList<Integer>(passageParArcs);
 				narc=localArc.getNoeud();
-								ArrayList<Double>localSC=new ArrayList<Double>();
-				for(int j = 0; j < scoreDSC.size() ; j++ )
+				ArrayList<Double>localSC=new ArrayList<Double>();
+				
+				for(int j = 0; j < scoreDSC.size() ; j++)
 				{
 					localSC.add(new Double(scoreDSC.get(j).doubleValue()));
 				}
-		
-				
+					
 				if(localPPA.get(localArc.getIndice())>0)
 				{
 					double score=narc.getNoyal().evalueAngle(trangle);
 					
-					if(localArc.getCharc() == 'C' || localArc.getCharc() == 'W')
+					if(localArc.getCharc() == 'B' || localArc.getCharc() == 'V')
 					{//le print conditionnel, la révolution du débugage.
 					System.out.println("PARCOURS"+tracep+": Angle :"+narc.getNoyal() + " De la Lettre : " + localArc.getCharc());
 					System.out.println("Ampf :"+trace.get(tracep).getAmpf()+" Avpf : "+trace.get(tracep).getAvpf());

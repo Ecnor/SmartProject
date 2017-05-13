@@ -35,13 +35,11 @@ public class UserLetterTrace {
 	/**
 	 * Taille de la fen�tre de d�rivation
 	 */
-	//public static final int DERIVATE_WIDTH = 5;
 	public static final int DERIVATE_WIDTH = 2;
 	
 	/**
 	 * Seuil de d�tection de plateau
 	 */
-	//public static final int ANGLE_THRESHOLD = 50;
 	public static final int ANGLE_THRESHOLD = 10;
 	
 	/**
@@ -49,12 +47,16 @@ public class UserLetterTrace {
 	 */
 	public static final int ANGLE_GAP = 3;
 	
+	/**
+	 * Seuil de détection d'angle droit
+	 */
+	public static final int RIGHT_ANGLE_DETECTION_THRESHOLD = 120;
+	
 	
 	/**
 	 * Lors de la détection d'angles, après détection de l'annulation d'une composante, taille
 	 * de la fenêtre de détection de changement de signe de l'autre composante
 	 */
-	//public static final int SIGN_DETECTION_WIDTH = 30;
 	public static final int SIGN_DETECTION_WIDTH = 10;
 	
 	public static final int ANGLE_DETECTION_WIDTH = 2;
@@ -255,8 +257,6 @@ public class UserLetterTrace {
 		}
 			
 		if(barredroite) {
-			System.out.println("BARRE DROITE LOL; min=" + min + " max=" + max);
-			max++;
 			ampfX = 0;
 			ampfY = 0;
 			avpfX = 0;
@@ -265,7 +265,7 @@ public class UserLetterTrace {
 			boolean inv = false;
 			
 			if(composante == 'x') {
-				if(min > 5) {
+				if(min > 5 && min < derivedAllPoints.size() - 5) {
 					System.out.println("MIN");
 					for(int i = min - 5; i < min; i++)
 					{						
@@ -288,7 +288,7 @@ public class UserLetterTrace {
 					
 					if(ampfY < 20) {
 						// coin haut gauche 1
-						if(ampfX > 100) {
+						if(ampfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin haut gauche");
 							AngleMesure a;
 							
@@ -300,7 +300,7 @@ public class UserLetterTrace {
 							mesuredAngles.add(a);
 						}
 						// coin haut droit 2
-						else if(ampfX < -100) {
+						else if(ampfX < -RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin haut droit");
 							AngleMesure a;
 							
@@ -317,7 +317,7 @@ public class UserLetterTrace {
 					}
 				}
 				
-				if(max < derivedAllPoints.size() - 5) {
+				if(max > 5 && max < derivedAllPoints.size() - 5) {
 					System.out.println("MAX");
 					
 					for(int i = max + 1; i <= max + 5; i++)
@@ -340,7 +340,7 @@ public class UserLetterTrace {
 					
 					if(avpfY < 20) {
 						// coin bas gauche 4
-						if(avpfX > 100) {
+						if(avpfX > RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin bas gauche");
 							AngleMesure a;
 							
@@ -352,7 +352,7 @@ public class UserLetterTrace {
 							mesuredAngles.add(a);
 						}
 						// coin bas droit 3
-						else if(avpfX < -100) {
+						else if(avpfX < -RIGHT_ANGLE_DETECTION_THRESHOLD) {
 							System.out.println("coin bas droit");
 							AngleMesure a;
 							

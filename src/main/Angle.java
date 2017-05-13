@@ -109,34 +109,31 @@ public class Angle {
 		}
 		else {
 			//Avant on pensait que le sens d'écriture avait une importance...
-				if(this.direction==DIRECTIONS.bas)
-				{
-					if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-						return score;
-					}
-				} 
-				else if(this.direction==DIRECTIONS.haut)
-				{
-					if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-						return score;
-					}
-				} 
-				else if(this.direction==DIRECTIONS.droite)
-				{
-					if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
-						return score;
-					}
-				} 
-				else if(this.direction==DIRECTIONS.gauche)
-				{
-					if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
-						return score;
-					}
-				} 
-			
-		
-		
-			
+			if(this.direction==DIRECTIONS.bas)
+			{
+				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+					return score;
+				}
+			} 
+			else if(this.direction==DIRECTIONS.haut)
+			{
+				if(!(alpha.getComposante() == 'y' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+					return score;
+				}
+			} 
+			else if(this.direction==DIRECTIONS.droite)
+			{
+				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() < 0 && alpha.getAvpf() > 0))) {
+					return score;
+				}
+			} 
+			else if(this.direction==DIRECTIONS.gauche)
+			{
+				if(!(alpha.getComposante() == 'x' && (alpha.getAmpf() > 0 && alpha.getAvpf() < 0))) {
+					return score;
+				}
+			} 
+					
 			double sum = (double) (Math.abs(alpha.getAmpf()) + Math.abs(alpha.getAvpf()));
 			if(this.type==TYPES.aigu)
 			{
@@ -153,6 +150,6 @@ public class Angle {
 	}
 	
 	public String toString() {
-		return type.toString()+" "+direction.toString();
+		return type.toString() + " " + direction.toString();
 	}
 }

@@ -55,13 +55,13 @@ public class PadDraw extends JComponent {
 				if(distance > POINT_SPACING) {				
 					allPoints.add(new Point((int)currentX, (int)currentY));
 					lastInsertX = currentX;
-					lastInsertY = currentY;
-					
-					if(graphics2D != null)
-						graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
-						//graphics2D.drawLine((int)currentX,(int)currentY,(int)currentX,(int)currentY);
-					repaint();
+					lastInsertY = currentY;				
 				}
+				
+				if(graphics2D != null)
+					graphics2D.drawLine(oldX, oldY, (int)currentX, (int)currentY);
+				
+				repaint();
 				
 				oldX = (int)currentX;
 				oldY = (int)currentY;
